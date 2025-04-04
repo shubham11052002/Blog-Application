@@ -1,0 +1,8 @@
+node_modules/
+blog-backend/node_modules/
+blog-frontend/node_modules/
+.env
+blog-backend/.env
+blog-frontend/.env
+build/
+dist/
