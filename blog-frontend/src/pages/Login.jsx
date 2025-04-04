@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [email,setEmail] = useState("")
@@ -9,7 +10,7 @@ const Login = () => {
   const handleLogin =  async (e) =>{
     e.preventDefault()
    if(!email || !password || !role){
-    alert("please fill all field")
+    toast.error("please fill all field")
     return;
    }
     try {
@@ -20,13 +21,13 @@ const Login = () => {
         },
       })
       console.log(data, "response data ...")
-      alert("✅ User Login sucessfully...")
+      toast.success("✅ User Login sucessfully...")
       setEmail("")
       setPassword("")
       setRole("")
     } catch (error) {
       console.log(error, 'error in Login...')
-      alert(error.response?.data?.message || "Login failed. Please try again.");
+      toast.error(error.response?.data?.message || "Login failed. Please try again.");
     }
   }
    

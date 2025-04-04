@@ -11,7 +11,7 @@ import Register from "../src/pages/Register.jsx"
 import Footer from "../src/components/Footer.jsx"
 import { useAuth } from './context/AuthProvider.jsx'
 import Creators from "../src/pages/Creators.jsx"
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   const location = useLocation();
@@ -35,7 +35,7 @@ function App() {
         <Route exact path='creators' element={<Creators/>} />
       </Routes>
       <Toaster />
-   {/* {!hideNavbarFooter && <Footer/>} */}
+   { !hideNavbarFooter && <Footer/> }
     </div>
   )
 }

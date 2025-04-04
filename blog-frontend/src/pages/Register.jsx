@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 const Register = () => {
@@ -28,7 +29,7 @@ const Register = () => {
   const handleRegister =  async (e) =>{
     e.preventDefault()
     if(!name || !email || !phone || !password || !role || !education){
-    alert("❌ Please fill all required field...")
+    toast.error("❌ Please fill all required field...")
       return;
     }
     const formData = new FormData()
@@ -48,18 +49,18 @@ const Register = () => {
       })
       console.log(data, "response data ...")
       if(data.success){
-      alert("Usre register sucessfully...")
+      toast.success("Usre register sucessfully...")
       setEmail("")
       setPassword("")
       setRole("")
       navigateTo("/")
       }
       else{
-       alert(`❌ Error ${data.message}`)
+       toast.error(`❌ Error ${data.message}`)
       }
     } catch (error) {
       console.log(error, 'error in register...')
-      alert(error.message || " please fill required fields...")
+      toast.error(error.message || " please fill required fields...")
     }
   }
    

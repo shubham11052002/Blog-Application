@@ -9,7 +9,7 @@
             try {
                 const data = await axios.get("http://localhost:3001/all-blogs", {
                 });
-                setBlogs(data);
+                setBlogs(data.data.blogs);
                 // console.log("auth provider data " ,data)
             } catch (error) {
                 console.log(error.response ? error.response.data : error, "error in fetching data...");
