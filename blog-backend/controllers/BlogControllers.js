@@ -24,9 +24,9 @@ const createBlog = async (req, res) => {
         if (!title || !category || !about) {
             return res.status(400).json({ success: false, message: "Title, category & about are required fields." });
         }
-        const adminName = req.user.name;
-        const adminPhoto = req.user.photo;
-        const createdBy = req.user._id;
+        const adminName = req?.user?.name;
+        const adminPhoto = req?.user?.photo?.url;
+        const createdBy = req?.user?._id;
 
         let cloudinaryResponse;
         try {

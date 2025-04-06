@@ -50,7 +50,7 @@ const Login = () => {
       <div className="mb-4">
       <input type="password"  placeholder="Enter your password" value={password} onChange={(e)=>{setPassword(e.target.value)}} className="w-full p-2 border rounded-md " autoComplete="current-password"  required/>
       </div>
-              <p className="text-center mb-4">New User?&nbsp;&nbsp; <Link className="text-blue-700 ">Register now</Link></p>
+              <p className="text-center mb-4">New User?&nbsp;&nbsp; <Link to={"/register"} className="text-blue-700 ">Register now</Link></p>
        <div className="flex justif y-center">
        <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition duration-300">
   Login

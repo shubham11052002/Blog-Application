@@ -29,10 +29,10 @@ const Navbar = () => {
         </div>
 
         <div className="space-x-2  font-bold hidden md:flex" >
-  <Link to="dashboard" className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 transition">
+  <Link to="/dashboard" className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 transition">
     Dashboard
   </Link>
-  <Link to="login" className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition">
+  <Link to="/login" className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition">
     Login
   </Link>
 </div>

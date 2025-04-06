@@ -35,7 +35,7 @@ function App() {
         <Route exact path='creators' element={<Creators/>} />
       </Routes>
       <Toaster />
-   { !hideNavbarFooter && <Footer/> }
+   {/* { !hideNavbarFooter && <Footer/> } */}
     </div>
   )
 }

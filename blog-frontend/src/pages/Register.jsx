@@ -100,7 +100,7 @@ const Register = () => {
           </div>
             <input type="file" onChange={photoHandler} className="w-full p-2 border rounded-md" />
         </div>
-        <p className="text-center mb-4">Already register?&nbsp;&nbsp; <Link className="text-blue-700 ">Login now</Link></p>
+        <p className="text-center mb-4">Already register?&nbsp;&nbsp; <Link to={"/login"} className="text-blue-700 ">Login now</Link></p>
        <div className="flex justif y-center">
        <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition duration-300">
   Register
