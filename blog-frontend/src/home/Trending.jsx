@@ -29,7 +29,15 @@ const Trending = () => {
   return  (
     <div className=" container mx-auto">
     <h1 className=" text-2xl font-semibold mb-4 ml-2">Trending</h1>
-    <Carousel responsive={responsive} infinite autoPlay={false} customTransition="all 0.3s ease" transitionDuration={400}>
+    <Carousel responsive={responsive} 
+     infinite
+      autoPlay
+      autoPlaySpeed={2500}
+      customTransition="all 0.3s ease"
+      transitionDuration={400}
+      keyBoardControl
+      showDots={true}
+      >
       {blogs && blogs.length > 0 ? (
         blogs.slice(0, 6).map((element) => {
           return (
