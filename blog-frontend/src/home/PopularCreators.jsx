@@ -10,7 +10,7 @@ const PupularCreators = () => {
     const {data} = await axios.get("http://localhost:3001/admins",{
       withCredentials:true,
     });
-    console.log(data.admins, "admins data ")
+    // console.log(data.admins, "admins data ")
     setAdmin(data.admins)
   }
   fetchAdmins();
@@ -26,7 +26,6 @@ const PupularCreators = () => {
               key={element._id}
               className='flex flex-col items-center'
             >
-              <Link to={`/blog/${element._id}`}>
                 <div className="">
                   <img
                     src={element.photo.url}
@@ -38,7 +37,6 @@ const PupularCreators = () => {
                   <p className='font-serif font-bold'>{element.name}</p>
                   <p className='text-gray-600 text-xs font-bold'>{element.role}</p>
                 </div>
-              </Link>
             </div>
           );
         })

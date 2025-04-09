@@ -104,12 +104,16 @@ const Logout = async (req, res) => {
 }
 const getMyProfile = async (req, res) => {
     try {
-        const user = await req.user;
-        return res.status(200).send({ success: true, user })
+        const user = req.user;
+        if (!user) {
+            return res.status(401).json({ message: "Unauthorized: No user found" });
+        }
+        return res.status(200).send({ success: true, user });
     } catch (error) {
-        return res.status(400).send({ message: "Internal Server Error in getMyProfile" })
+        return res.status(400).send({ message: "Internal Server Error in getMyProfile" });
     }
-}
+};
+
 const getAdmins = async (req, res) => {
     try {
         const admins = await User.find({ role: "admin" });
