@@ -26,15 +26,17 @@ function About() {
 
      {
       profile.map((element,idx)=>{ 
+       return (
         <p  
         className="text-gray-700 leading-relaxed text-lg">
-        Hello, I'm <strong>{element.name}shubham sharma</strong> 
+        Hello, I'm <strong>{element.name}</strong> 
         <strong className="text-indigo-700 font-semibold hover:scale-105 transition-transform duration-500">
         </strong>
         , a passionate and proficient full-stack developer. I specialize in
         building dynamic, responsive, and user-friendly web applications that
         deliver seamless digital experiences.
       </p>
+       )
       })
      }
 
