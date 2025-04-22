@@ -108,7 +108,7 @@ const getMyProfile = async (req, res) => {
         if (!user) {
             return res.status(401).json({ message: "Unauthorized: No user found" });
         }
-        return res.status(200).send({ success: true, user });
+        return res.status(200).json({ success: true, user });
     } catch (error) {
         return res.status(400).send({ message: "Internal Server Error in getMyProfile" });
     }

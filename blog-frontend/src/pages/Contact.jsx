@@ -13,7 +13,7 @@ function Contact() {
 
   const onSubmit = async (data) => {
     const userInfo = {
-      access_key: "c660c9ce-c6f9-41f7-aa0f-8a24ea887b94",
+      access_key: "4262f9eb-749c-4317-9ae1-72144c65bcad",
       name: data.username,
       email: data.email,
       message: data.message,
@@ -21,6 +21,7 @@ function Contact() {
     try {
       await axios.post("https://api.web3forms.com/submit", userInfo);
       toast.success("Message sent successfully");
+      console.log(data)
     } catch (error) {
       toast.error("An error occurred");
     }
@@ -55,7 +56,7 @@ function Contact() {
           </ul>
         </div>
 
-        {/* Contact Form Section */}
+      
         <div className="p-10">
           <h3 className="text-2xl font-semibold text-gray-800 mb-6">
             Send a Message

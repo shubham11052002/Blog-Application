@@ -1,11 +1,18 @@
-import React from 'react'
+import React from "react";
+import { useAuth } from "../context/AuthProvider";
 
-const Dashboard = () => {
+function Dashboard() {
+  const {profile,isAuthenticated}=useAuth();
+    console.log(profile)
+    console.log(isAuthenticated)
+    if(!profile){
+      return(<p>data is here {profile}</p>)
+    }
   return (
     <div>
-      <h1>Dashboared</h1>
-    </div>
+    <h1>this is Dashboard</h1>
+  </div>
   )
-}
+};
 
-export default Dashboard
+export default Dashboard;
