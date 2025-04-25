@@ -1,16 +1,17 @@
 import React from "react";
 import { useAuth } from "../context/AuthProvider";
+import Sidebar from "../dashboard/Sidebar"
 
 function Dashboard() {
   const {profile,isAuthenticated}=useAuth();
-    console.log(profile)
-    console.log(isAuthenticated)
-    if(!profile){
-      return(<p>data is here {profile}</p>)
-    }
+  console.log("profile" ,profile)
+  console.log("isAuth" ,isAuthenticated)
+   
   return (
     <div>
-    <h1>this is Dashboard</h1>
+     <div>
+      <Sidebar/>
+     </div>
   </div>
   )
 };

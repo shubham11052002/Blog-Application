@@ -1,5 +1,6 @@
     import axios from "axios";
     import React,{ createContext, useContext, useEffect, useState} from "react";
+    import Cookies from "js-cookie"
     export const AuthContext = createContext();
 
     export const AuthProvider = ({children}) => {
@@ -9,15 +10,16 @@
     useEffect(()=>{
         const fetchProfile = async () =>{
             try {
-                const data = await axios.get("http://localhost:3001/my-profile", {
-                    withCredentials:true,
-                    headers:{
-                         "Content-type":"application/json"
+
+                 const data = await axios.get("http://localhost:3001/my-profile", {
+                        withCredentials: true,
+                        headers: {
+                            "Content-Type": "application/json"
                         }
-                });
-                // console.log("Fetched profile response from backend:", data);
-                setProfile(data.data.user);
-                setIsAuthenticated(true)
+                    });
+                    // console.log("data on backend " ,data)
+                    setProfile(data.data.user);
+                    setIsAuthenticated(true);
             } catch (error) {
                 console.log(error.response ? error.response.data : error, "error in fetching data...");
                         }
