@@ -1,29 +1,36 @@
     import axios from "axios";
     import React,{ createContext, useContext, useEffect, useState} from "react";
-    import Cookies from "js-cookie"
+    // import Cookies from "js-cookie"   not working due to security resons of js
     export const AuthContext = createContext();
 
     export const AuthProvider = ({children}) => {
         const [blogs,setBlogs] = useState();
         const [profile, setProfile] = useState(null);
         const [isAuthenticated, setIsAuthenticated] = useState(false);
-    useEffect(()=>{
-        const fetchProfile = async () =>{
-            try {
+        const [loading, setLoading] = useState(true);
 
-                 const data = await axios.get("http://localhost:3001/my-profile", {
-                        withCredentials: true,
-                        headers: {
-                            "Content-Type": "application/json"
-                        }
-                    });
-                    // console.log("data on backend " ,data)
-                    setProfile(data.data.user);
-                    setIsAuthenticated(true);
+    useEffect(()=>{
+        const fetchProfile = async () => {
+            try {
+              const response = await axios.get("http://localhost:3001/my-profile", {
+                withCredentials: true,
+                headers: {
+                  "Content-Type": "application/json"
+                }
+              });
+              console.log("Fetched profile data:", response.data);
+              setProfile(response.data.user);
+              setIsAuthenticated(true);
             } catch (error) {
-                console.log(error.response ? error.response.data : error, "error in fetching data...");
-                        }
-        };
+              console.log(
+                error.response ? error.response.data : error,
+                "error in fetching data..."
+              );
+            } finally {
+                setLoading(false);
+            }
+          };
+          
           
         const fetchBlogs = async () =>{
             try {
