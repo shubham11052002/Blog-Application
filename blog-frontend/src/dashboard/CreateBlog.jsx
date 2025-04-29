@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const CreateBlog = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  return <div>CreateBlog</div>;
+};
 
-export default CreateBlog
+export default CreateBlog;

@@ -5,12 +5,18 @@ import UpdateBlog from "../dashboard/UpdateBlog";
 import CreateBlog from "../dashboard/CreateBlog";
 import MyBlog from "../dashboard/MyBlogs"
 import MyProfile from "../dashboard/MyProfile" 
+import { Navigate } from "react-router-dom";
 
 function Dashboard() {
   const [component ,setComponent] = useState("My Blogs")
   const {profile,isAuthenticated}=useAuth();
   // console.log("profile" ,profile)
   // console.log("isAuth" ,isAuthenticated)
+  if(!isAuthenticated){
+    return (
+      <Navigate to={"/"}/>
+    )
+  }
    
   return (
     <div className="flex min-h-screen">

@@ -1,110 +1,111 @@
 import React, { useState } from "react";
 import { useAuth } from "../context/AuthProvider";
 import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
 import axios from "axios";
-import { FiMenu } from "react-icons/fi";
+import { CiMenuBurger } from "react-icons/ci";
+import { BiSolidLeftArrowAlt } from "react-icons/bi";
+import toast from "react-hot-toast";
 
 function Sidebar({ setComponent }) {
-  const { profile, isAuthenticated, loading, setIsAuthenticated } = useAuth();
-  const [show,setShow] = useState(false)
-  const navigate = useNavigate();
+  const { profile, setIsAuthenticated } = useAuth();
+  const navigateTo = useNavigate();
 
-  if (loading) {
-    return <div className="p-4 text-center">Loading...</div>;
-  }
+  const [show, setShow] = useState(false);
 
-  if (!isAuthenticated || !profile) {
-    return <div className="p-4 text-red-500 text-center">User not logged in</div>;
-  }
-
-  const handleNavigation = (section) => {
-    setComponent(section);
+  const handleComponents = (value) => {
+    setComponent(value);
   };
 
-  const navigateHome = () => {
-    navigate("/");
+  const gotoHome = () => {
+    navigateTo("/");
   };
 
   const handleLogout = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.get("http://localhost:3001/logout", {
-        withCredentials: true,
-      });
-      console.log(data);
+      const { data } = await axios.get(
+        "http://localhost:3001/logout",
+        { withCredentials: true }
+      );
+      toast.success(data.message);
+      localStorage.removeItem("jwt"); // deleting token in localStorage so that if user logged out it will go to login page
       setIsAuthenticated(false);
+      navigateTo("/login");
     } catch (error) {
-      console.error("Logout error:", error);
-      toast.error("An error occurred while logging out.");
+      console.log(error);
+      toast.error(error.response?.data?.message || "Failed to logout");
     }
   };
 
   return (
-   <>
-   <div>
-    <h1>react fragmentations 
-      
-    </h1>
-   </div>
-    <div className="w-64 min-h-screen bg-white shadow-md border-r border-gray-200 p-6 flex flex-col justify-between">
-      <div>
-        <div className="flex flex-col items-center mb-8">
-          <img
-            src={profile?.photo?.url}
-            alt="Profile"
-            className="w-20 h-20 rounded-full object-cover border-4 border-green-500 mb-2"
-          />
-          <p className="text-lg font-semibold text-gray-700">{profile?.name}</p>
-        </div>
-        <FiMenu />
+    <>
+      {/* Burger Icon for Mobile */}
+      <div
+        className="sm:hidden fixed top-4 left-4 z-50 cursor-pointer"
+        onClick={() => setShow(!show)}
+      >
+        <CiMenuBurger className="text-2xl" />
+      </div>
 
-        <ul className="space-y-4">
-          <li>
-            <button
-              onClick={() => handleNavigation("My Blogs")}
-              className="w-full px-4 py-2 bg-green-600 text-white rounded-md text-base font-medium hover:bg-green-700 transition duration-300"
-            >
-              My Blogs
-            </button>
-          </li>
-          <li>
-            <button
-              onClick={() => handleNavigation("Create Blog")}
-              className="w-full px-4 py-2 bg-blue-600 text-white rounded-md text-base font-medium hover:bg-blue-700 transition duration-300"
-            >
-              Create Blog
-            </button>
-          </li>
-          <li>
-            <button
-              onClick={() => handleNavigation("My Profile")}
-              className="w-full px-4 py-2 bg-pink-500 text-white rounded-md text-base font-medium hover:bg-pink-600 transition duration-300"
-            >
-              My Profile
-            </button>
-          </li>
-          <li>
-            <button
-              onClick={navigateHome}
-              className="w-full px-4 py-2 bg-gray-700 text-white rounded-md text-base font-medium hover:bg-gray-800 transition duration-300"
-            >
-              Home
-            </button>
-          </li>
+      {/* Sidebar */}
+      <div
+        className={`w-64 h-full shadow-lg fixed top-0 left-0 bg-gray-50 transition-transform duration-300 transform z-50 sm:translate-x-0 ${
+          show ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        {/* Close Arrow Icon */}
+        <div
+          className="sm:hidden absolute top-4 right-4 text-xl cursor-pointer"
+          onClick={() => setShow(false)}
+        >
+          <BiSolidLeftArrowAlt className="text-2xl" />
+        </div>
+
+        {/* Profile Info */}
+        <div className="text-center mt-8">
+          <img
+            className="w-24 h-24 rounded-full mx-auto mb-2 object-cover border-4 border-green-500"
+            src={profile?.photo?.url} // Fixed the profile photo path
+            alt="Profile"
+          />
+          <p className="text-lg font-semibold text-gray-700">{profile?.name}</p> {/* Fixed profile name */}
+        </div>
+
+        {/* Sidebar Menu */}
+        <ul className="space-y-6 mx-4 mt-10">
+          <button
+            onClick={() => handleComponents("My Blogs")}
+            className="w-full px-4 py-2 bg-green-500 rounded-lg hover:bg-green-700 transition duration-300 text-white"
+          >
+            MY BLOGS
+          </button>
+          <button
+            onClick={() => handleComponents("Create Blog")}
+            className="w-full px-4 py-2 bg-blue-400 rounded-lg hover:bg-blue-700 transition duration-300 text-white"
+          >
+            CREATE BLOG
+          </button>
+          <button
+            onClick={() => handleComponents("My Profile")}
+            className="w-full px-4 py-2 bg-pink-500 rounded-lg hover:bg-pink-700 transition duration-300 text-white"
+          >
+            MY PROFILE
+          </button>
+          <button
+            onClick={gotoHome}
+            className="w-full px-4 py-2 bg-red-500 rounded-lg hover:bg-red-700 transition duration-300 text-white"
+          >
+            HOME
+          </button>
+          <button
+            onClick={handleLogout}
+            className="w-full px-4 py-2 bg-yellow-500 rounded-lg hover:bg-yellow-700 transition duration-300 text-white"
+          >
+            LOGOUT
+          </button>
         </ul>
       </div>
-
-      <div className="mt-8">
-        <button
-          onClick={handleLogout}
-          className="w-full px-4 py-2 bg-red-500 text-white rounded-md text-base font-medium hover:bg-red-600 transition duration-300"
-        >
-          Logout
-        </button>
-      </div>
-    </div>
-   </>
+    </>
   );
 }
 
