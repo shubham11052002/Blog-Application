@@ -10,8 +10,7 @@ function Blogs() {
         const { data } = await axios.get("http://localhost:3001/all-blogs", {
           withCredentials: true,
         });
-        console.log(data.blogs)
-        setBlogs(data.blogs); // assuming response has a "blogs" array
+        setBlogs(data.blogs);
       } catch (error) {
         console.error("Error fetching blogs:", error);
       }
@@ -21,37 +20,45 @@ function Blogs() {
   }, []);
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold text-indigo-700 mb-10 text-center">📚 All Blogs</h1>
+    <div className="max-w-7xl mx-auto px-4 py-12">
+      <h1 className="text-4xl font-bold text-indigo-700 mb-10 text-center">
+        📝 Explore Blogs
+      </h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {blogs.map((blog) => (
+      <div className="columns-1 sm:columns-2 lg:columns-4 gap-4 space-y-6">
+        {blogs.map((blog, index) => (
           <div
             key={blog._id}
-            className="bg-white rounded-2xl shadow-md overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-lg duration-300"
+            className="break-inside-avoid bg-white rounded-2xl shadow-md hover:shadow-xl hover:border border-black transition-all duration-300 transform hover:-translate-y-1 animate-fade-in"
+            style={{ animationDelay: `${index * 50}ms` }}
           >
-            <img
-              src={blog.blogImage?.url}
-              alt={blog.title}
-              className="w-full h-48 object-cover"
-            />
-
-            <div className="p-6">
-              <h2 className="text-2xl font-semibold text-gray-800">{blog.title}</h2>
-              <p className="text-gray-600 mt-2 line-clamp-3">{blog.about}</p>
-
-              <div className="mt-4 flex justify-end">
-                <div className="bg-indigo-700  px-4 py-2 rounded-full transition duration-300 hover:bg-black text-white ">
-                 {blog.category}
-                </div>
+            <div className="relative overflow-hidden rounded-t-2xl">
+              <img
+                src={blog.blogImage?.url}
+                alt={blog.title}
+                className="w-full h-auto object-cover transition-transform duration-300 hover:scale-105"
+              />
+              <div className="absolute top-2 left-2 bg-indigo-600 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
+                {blog.category}
               </div>
+            </div>
+
+            <div className="p-4">
+              <h2 className="text-lg font-semibold text-gray-800 truncate">
+                {blog.title}
+              </h2>
+              <p className="text-sm text-gray-600 mt-2 line-clamp-4">
+                {blog.about}
+              </p>
             </div>
           </div>
         ))}
       </div>
 
       {blogs.length === 0 && (
-        <p className="text-center text-gray-500 mt-10">No blogs available yet.</p>
+        <p className="text-center text-gray-400 mt-10 text-lg">
+          No blogs available yet.
+        </p>
       )}
     </div>
   );

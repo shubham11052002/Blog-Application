@@ -1,9 +1,13 @@
 import axios from "axios";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthProvider";
 
 const Register = () => {
+  const  [isAuthenticated,setIsAuthenticated] = useAuth();
+const navigate = useNavigate()
+
   const [name,setName] = useState("")
   const [email,setEmail] = useState("")
   const [phone,setPhone] = useState("")
@@ -50,9 +54,15 @@ const Register = () => {
       console.log(data, "response data ...")
       if(data.success){
       toast.success("Usre register sucessfully...")
+      setIsAuthenticated(true);
+      setName("")
       setEmail("")
+      setPhone("")
       setPassword("")
       setRole("")
+      setEducation("")
+      setPhoto("")
+      setPhotoPreview("")
       navigateTo("/")
       }
       else{

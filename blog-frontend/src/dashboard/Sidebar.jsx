@@ -39,7 +39,6 @@ function Sidebar({ setComponent }) {
 
   return (
     <>
-      {/* Burger Icon for Mobile */}
       <div
         className="sm:hidden fixed top-4 left-4 z-50 cursor-pointer"
         onClick={() => setShow(!show)}
@@ -47,13 +46,11 @@ function Sidebar({ setComponent }) {
         <CiMenuBurger className="text-2xl" />
       </div>
 
-      {/* Sidebar */}
       <div
         className={`w-64 h-full shadow-lg fixed top-0 left-0 bg-gray-50 transition-transform duration-300 transform z-50 sm:translate-x-0 ${
           show ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        {/* Close Arrow Icon */}
         <div
           className="sm:hidden absolute top-4 right-4 text-xl cursor-pointer"
           onClick={() => setShow(false)}
@@ -61,17 +58,15 @@ function Sidebar({ setComponent }) {
           <BiSolidLeftArrowAlt className="text-2xl" />
         </div>
 
-        {/* Profile Info */}
         <div className="text-center mt-8">
           <img
             className="w-24 h-24 rounded-full mx-auto mb-2 object-cover border-4 border-green-500"
-            src={profile?.photo?.url} // Fixed the profile photo path
+            src={profile?.photo?.url} 
             alt="Profile"
           />
-          <p className="text-lg font-semibold text-gray-700">{profile?.name}</p> {/* Fixed profile name */}
+          <p className="text-lg font-semibold text-gray-700">{profile?.name}</p> 
         </div>
 
-        {/* Sidebar Menu */}
         <ul className="space-y-6 mx-4 mt-10">
           <button
             onClick={() => handleComponents("My Blogs")}

@@ -1,6 +1,5 @@
     import axios from "axios";
     import React,{ createContext, useContext, useEffect, useState} from "react";
-    // import Cookies from "js-cookie"   not working due to security resons of js
     export const AuthContext = createContext();
 
     export const AuthProvider = ({children}) => {
@@ -18,7 +17,7 @@
                   "Content-Type": "application/json"
                 }
               });
-              console.log("Fetched profile data:", response.data);
+              // console.log("Fetched profile data:", response.data);
               setProfile(response.data.user);
               setIsAuthenticated(true);
             } catch (error) {
@@ -46,7 +45,7 @@
         fetchBlogs();
     },[])
     return (
-        <AuthContext.Provider value={{ blogs, profile, isAuthenticated }}>{children} </AuthContext.Provider>
+        <AuthContext.Provider value={{ blogs, profile,setProfile, isAuthenticated,setIsAuthenticated }}>{children} </AuthContext.Provider>
     )
     };
 

@@ -12,6 +12,8 @@ import Footer from "../src/components/Footer.jsx"
 import { useAuth } from './context/AuthProvider.jsx'
 import Creators from "../src/pages/Creators.jsx"
 import { Toaster } from 'react-hot-toast';
+import UpdateBlog from './dashboard/UpdateBlog.jsx'
+import MyBlogs from './dashboard/MyBlogs.jsx'
 
 function App() {
   const location = useLocation();
@@ -24,16 +26,17 @@ function App() {
   return (
     <div>
      {!hideNavbarFooter &&  <Navbar/>}
-      <Routes>
-         <Route exact path="/" element={<Home/>}/> 
-        <Route exact path="/blogs" element={<Blogs/>}/>
-        <Route exact path="/about" element={<About/>}/>
-        <Route exact path="/contact" element={<Contact/>}/>
-        <Route exact path="/login" element={<Login/>}/>
-        <Route exact path="/register" element={<Register/>}/>
-        <Route exact path="/dashboard" element={<Dashboard/>}/>
-        <Route exact path='creators' element={<Creators/>} />
-      </Routes>
+     <Routes>
+  <Route path="/" element={<Home />} />
+  <Route path="/blogs" element={<Blogs />} />
+  <Route path="/about" element={<About />} />
+  <Route path="/contact" element={<Contact />} />
+  <Route path="/login" element={<Login />} />
+  <Route path="/register" element={<Register />} />
+  <Route path="/dashboard" element={<Dashboard />} />
+  <Route path="/creators" element={<Creators />} />
+  <Route path="/blog/update/:id" element={<UpdateBlog />} />
+</Routes>
       <Toaster />
    { !hideNavbarFooter && <Footer/> } 
     </div>

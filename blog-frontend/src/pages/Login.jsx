@@ -1,9 +1,12 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useAuth } from "../context/AuthProvider";
 
 const Login = () => {
+  const  {isAuthenticated,setIsAuthenticated} = useAuth();
+const navigate = useNavigate()  
   const [email,setEmail] = useState("")
   const [password,setPassword] = useState("")
   const [role,setRole] = useState("")
@@ -22,9 +25,11 @@ const Login = () => {
       })
       console.log(data, "response data ...")
       toast.success("✅ User Login sucessfully...")
+      setIsAuthenticated(true)
       setEmail("")
       setPassword("")
       setRole("")
+      navigate("/")
     } catch (error) {
       console.log(error, 'error in Login...')
       toast.error(error.response?.data?.message || "Login failed. Please try again.");
