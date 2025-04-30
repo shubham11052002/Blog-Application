@@ -7,8 +7,8 @@ import "react-multi-carousel/lib/styles.css";
 const Educational = () => {
   const { blogs } = useAuth();
   const educationalBlogs = Array.isArray(blogs)
-    ? blogs.filter((blog) => blog?.category === "Education")
-    : [];
+  ? blogs.filter((blog) => blog?.category?.toLowerCase() === "education")
+  : [];
   const responsive = {
     superLargeDesktop: { breakpoint: { max: 4000, min: 3000 }, items: 5 },
     desktop: { breakpoint: { max: 3000, min: 1024 }, items: 3 },
@@ -33,7 +33,7 @@ const Educational = () => {
           showDots={false}
           itemClass="px-2"
         >
-          {educationalBlogs.slice(0, 6).map((blog, index) => (
+          {educationalBlogs.slice(0, 15).map((blog, index) => (
             <div key={index} className="p-2">
               <Link
                 to={`/blog/${blog._id}`}

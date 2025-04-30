@@ -22,9 +22,10 @@ app.use(fileUpload(
     }
 ));
 app.use(cors({
-    origin: "http://localhost:5173",
-    credentials: true
-  }));
+    origin: process.env.FRONT_END_URL,
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+}));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -48,7 +49,7 @@ cloudinary.config({
 });
 
 app.use(user);
-app.use(blog);  
+app.use(blog);
 
 // ✅ Root Route
 app.get('/', (req, res) => {
