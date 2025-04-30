@@ -23,7 +23,6 @@ const Educational = () => {
       Education empowers individuals, enriches minds, and shapes a brighter future.
       </p>
 
-      {/* ✅ Replace map with Carousel */}
       {educationalBlogs.length > 0 ? (
         <Carousel
           responsive={responsive}
