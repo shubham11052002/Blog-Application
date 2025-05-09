@@ -12,7 +12,7 @@ function MyBlogs() {
         const { data } = await axios.get("http://localhost:3001/my-blogs", {
           withCredentials: true,
         });
-        console.log("Fetched from backend:", data);
+        // console.log("Fetched from backend:", data);
 
         setMyBlogs(data.myBlog); 
       } catch (error) {

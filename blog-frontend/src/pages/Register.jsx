@@ -6,7 +6,7 @@ import { useAuth } from "../context/AuthProvider";
 
 const Register = () => {
   const  {isAuthenticated,setIsAuthenticated,setProfile} = useAuth();
-const navigate = useNavigate()
+const navigateTo = useNavigate()
 
   const [name,setName] = useState("")
   const [email,setEmail] = useState("")
@@ -51,7 +51,7 @@ const navigate = useNavigate()
           "Content-Type":"multipart/form-data",
         },
       })
-      console.log(data, "response data ...")
+      // console.log(data, "response data ...")
       if(data.success){
       toast.success("Usre register sucessfully...")
       setProfile(data)

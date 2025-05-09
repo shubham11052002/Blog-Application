@@ -13,7 +13,8 @@ import { useAuth } from './context/AuthProvider.jsx'
 import Creators from "../src/pages/Creators.jsx"
 import { Toaster } from 'react-hot-toast';
 import UpdateBlog from './dashboard/UpdateBlog.jsx'
-import MyBlogs from './dashboard/MyBlogs.jsx'
+// import MyBlogs from './dashboard/MyBlogs.jsx'
+import { Detail } from './pages/Detail.jsx'
 
 function App() {
   const location = useLocation();
@@ -32,6 +33,7 @@ function App() {
   <Route path="/about" element={<About />} />
   <Route path="/contact" element={<Contact />} />
   <Route path="/login" element={<Login />} />
+  <Route path="/blog/:id" element={<Detail />} />
   <Route path="/register" element={<Register />} />
   <Route path="/dashboard" element={<Dashboard />} />
   <Route path="/creators" element={<Creators />} />

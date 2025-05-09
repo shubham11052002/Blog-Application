@@ -33,7 +33,7 @@ const Educational = () => {
           showDots={false}
           itemClass="px-2"
         >
-          {educationalBlogs.slice(0, 15).map((blog, index) => (
+          {educationalBlogs.slice(0, 99).map((blog, index) => (
             <div key={index} className="p-2">
               <Link
                 to={`/blog/${blog._id}`}

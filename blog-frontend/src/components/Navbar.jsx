@@ -4,13 +4,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineMenu } from "react-icons/ai";
 import {IoCloseSharp} from "react-icons/io5"
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const Navbar = () => {
   // const {user, blogs} = useAuth();
   // console.log("Navbar Blog Data " ,blogs )
   const [show ,setShow] = useState(true);
   const {profile,isAuthenticated,setIsAuthenticated } = useAuth();
-  console.log(profile)
+  // console.log(profile)
   const navigateTo = useNavigate();
 
   const handleLogout = async (e) => {
@@ -49,14 +50,20 @@ const Navbar = () => {
       {show?<IoCloseSharp size={20} />:<AiOutlineMenu size={20} />}
     </div>
         </div>
-
+     
+        {/* condotion for admin can only dashboard page */}
         <div className="space-x-2  font-bold hidden md:flex" >
-  <Link to="/dashboard" className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 transition">
+          { isAuthenticated && profile?.role==="admin"?( <Link to="/dashboard" className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 transition">
     Dashboard
-  </Link>
-  <Link to="/login" className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition">
+  </Link>):("")}
+ 
+   {!isAuthenticated ? ( <Link to="/login" className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition">
     Login
-  </Link>
+  </Link>): (
+    <div> 
+      <button onClick={handleLogout} className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition" >Logout</button>
+    </div>
+  )}
 </div>
       </div>
        {/* mobile navbar  */}
