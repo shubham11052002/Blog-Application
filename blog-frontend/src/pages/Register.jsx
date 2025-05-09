@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
 
 const Register = () => {
-  const  [isAuthenticated,setIsAuthenticated] = useAuth();
+  const  {isAuthenticated,setIsAuthenticated,setProfile} = useAuth();
 const navigate = useNavigate()
 
   const [name,setName] = useState("")
@@ -54,6 +54,7 @@ const navigate = useNavigate()
       console.log(data, "response data ...")
       if(data.success){
       toast.success("Usre register sucessfully...")
+      setProfile(data)
       setIsAuthenticated(true);
       setName("")
       setEmail("")

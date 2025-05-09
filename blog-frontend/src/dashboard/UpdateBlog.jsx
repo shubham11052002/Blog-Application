@@ -33,7 +33,6 @@ function UpdateBlog() {
         });
         const data = res.data.blog;
         console.log("Fetched data:", data);
-
         setTitle(data.title || "");
         setCategory(data.category || "");
         setAbout(data.about || "");

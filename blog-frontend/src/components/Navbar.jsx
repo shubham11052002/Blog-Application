@@ -1,13 +1,35 @@
 import React, { useState } from 'react'
 import { useAuth } from '../context/AuthProvider'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineMenu } from "react-icons/ai";
 import {IoCloseSharp} from "react-icons/io5"
+import axios from 'axios';
 
 const Navbar = () => {
-  const {user, blogs} = useAuth();
-  const [show ,setShow] = useState(true);
+  // const {user, blogs} = useAuth();
   // console.log("Navbar Blog Data " ,blogs )
+  const [show ,setShow] = useState(true);
+  const {profile,isAuthenticated,setIsAuthenticated } = useAuth();
+  console.log(profile)
+  const navigateTo = useNavigate();
+
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.get(
+        "http://localhost:3001/logout",
+        { withCredentials: true }
+      );
+      toast.success(data.message);
+      localStorage.removeItem("jwt"); // deleting token in localStorage so that if user logged out it will go to login page
+      setIsAuthenticated(false);
+      navigateTo("/login");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response?.data?.message || "Failed to logout");
+    }
+  };
+
   return (
     <>
     <nav className='shadow-lg px-4 py-2'>

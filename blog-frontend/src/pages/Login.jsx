@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { useAuth } from "../context/AuthProvider";
 
 const Login = () => {
-  const  {isAuthenticated,setIsAuthenticated} = useAuth();
+  const  {isAuthenticated,setIsAuthenticated,setProfile} = useAuth();
 const navigate = useNavigate()  
   const [email,setEmail] = useState("")
   const [password,setPassword] = useState("")
@@ -25,6 +25,7 @@ const navigate = useNavigate()
       })
       console.log(data, "response data ...")
       toast.success("✅ User Login sucessfully...")
+      setProfile(data)
       setIsAuthenticated(true)
       setEmail("")
       setPassword("")
