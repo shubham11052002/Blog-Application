@@ -158,9 +158,7 @@ const blockUser = async (req, res) => {
     }
   };
 
-
-
-
+  
 module.exports = {
     Register,
     Login,
