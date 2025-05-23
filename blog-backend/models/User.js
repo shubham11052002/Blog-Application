@@ -8,6 +8,10 @@ const userSchema = new mongoose.Schema({
     photo: { public_id: { type: String, required: true }, url: { type: String, required: true } },
     education: { type: String },
     role: { type: String, required: true, enum: ["user", "admin"] },
+    isBlocked: {
+        type: Boolean,
+        default: false,
+      },
     password: { type: "String", select: false, required: true },
     token: { type: String },
 })

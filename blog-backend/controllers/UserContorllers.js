@@ -62,6 +62,7 @@ const Register = async (req, res) => {
         return res.status(500).json({ success: false, message: "Internal Server Error in Register ", error: error.message });
     }
 };
+
 const Login = async (req, res) => {
     const { email, password, role } = req.body;
     try {
@@ -123,10 +124,49 @@ const getAdmins = async (req, res) => {
     }
 }
 
+const getAllUsers = async (req, res) => {
+    try {
+        console.log("📥 Received request to get all users.");
+
+        const users = await User.find({ role: { $ne: 'admin' } }).select('-password');  // Exclude admins by filtering role
+
+        console.log("📤 Found users:", users);
+
+        if (users.length > 0) {
+            return res.status(200).json({ success: true, users });
+        } else {
+            return res.status(404).json({ success: false, message: 'No users found' });
+        }
+    } catch (err) {
+        console.error("❌ Error in getAllUsers:", err.message);
+        return res.status(500).json({ success: false, message: 'Server error' });
+    }
+};
+
+const blockUser = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { isBlocked } = req.body;
+  
+      const user = await User.findByIdAndUpdate(id, { isBlocked }, { new: true });
+  
+      if (!user) return res.status(404).json({ message: "User not found" });
+  
+      res.status(200).json({ message: `User has been ${isBlocked ? 'blocked' : 'unblocked'}` });
+    } catch (err) {
+      res.status(500).json({ message: "Server error" });
+    }
+  };
+
+
+
+
 module.exports = {
     Register,
     Login,
     Logout,
     getMyProfile,
     getAdmins,
+    getAllUsers,
+    blockUser,
 }
