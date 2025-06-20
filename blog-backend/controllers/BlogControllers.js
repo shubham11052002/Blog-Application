@@ -128,6 +128,15 @@ const updateBlog = async (req, res) => {
     }
 }
 
+const deleteAllBlogs = async (req, res) => {
+    try {
+        await Blog.deleteMany({});
+        res.status(200).json({ message: "All blogs deleted successfully" });
+    } catch (error) {
+        res.status(500).json({ message: "Error deleting blogs", error });
+    }
+};
+
 module.exports = {
     createBlog,
     deleteBlog,
@@ -135,4 +144,5 @@ module.exports = {
     getSingleBlog,
     getMyBlogs,
     updateBlog,
+    deleteAllBlogs,
 }

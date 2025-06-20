@@ -64,7 +64,6 @@ export const Detail = () => {
         </div>
       </div>
 
-      {/* Optional: You can add a divider and more sections below */}
       <div className="mt-10 border-t pt-6 text-gray-500 text-sm">
       <p className="text-gray-500 text-sm">
   Posted on: {new Date(blogs?.createdAt).toLocaleString()}

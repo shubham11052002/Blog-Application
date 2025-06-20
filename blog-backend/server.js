@@ -22,9 +22,8 @@ app.use(fileUpload(
     }
 ));
 app.use(cors({
-    origin: process.env.FRONT_END_URL,
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: 'http://localhost:5173',
+    credentials: true
 }));
 app.use(cookieParser());
 app.use(express.json());

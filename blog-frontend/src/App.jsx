@@ -15,7 +15,6 @@ import { Toaster } from 'react-hot-toast';
 import UpdateBlog from './dashboard/UpdateBlog.jsx'
 // import MyBlogs from './dashboard/MyBlogs.jsx'
 import { Detail } from './pages/Detail.jsx'
-import UserList from './dashboard/UserList.jsx'
 
 function App() {
   const location = useLocation();
@@ -38,7 +37,6 @@ function App() {
   <Route path="/register" element={<Register />} />
   <Route path="/dashboard" element={<Dashboard />} />
   <Route path="/creators" element={<Creators />} />
-  <Route path="/admin/users" element={<UserList />} />
   <Route path="/blog/update/:id" element={<UpdateBlog />} />
 </Routes>
       <Toaster />

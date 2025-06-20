@@ -7,10 +7,10 @@
         about: { type: String, required: true, minLength: [10, "minimum length is 10 words"] },
         adminName: { type: String, },
         adminPhoto: { type: String, },
-        createdAt: {
-            type: Date,
-            default: Date.now,
-        },
+        // createdAt: {
+        //     type: Date,
+        //     default: Date.now,
+        // },
         createdBy: { type: mongoose.Schema.ObjectId, ref: "User" },
     }, { timestamps: true })
     const Blog = mongoose.model("Blog", blogSchema);

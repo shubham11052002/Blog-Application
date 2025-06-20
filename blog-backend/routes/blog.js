@@ -1,26 +1,32 @@
 const express = require("express")
 const router = express.Router();
 const BlogContorllers = require("../controllers/BlogControllers");
-const { isAuthenticate, isAdmin } = require("../middleware/authUser");
-
-router.post("/create", isAuthenticate, isAdmin("admin"), (req, res) => {
+const { isAuthenticate, isAdmin, checkBlocked } = require('../middleware/authUser');
+router.post("/create", isAuthenticate,checkBlocked, isAdmin("admin"), (req, res) => {
     BlogContorllers.createBlog(req, res);
 })
-router.delete("/delete/:id", isAuthenticate, isAdmin("admin"), (req, res) => {
+router.delete("/delete/:id", isAuthenticate,checkBlocked, isAdmin("admin"), (req, res) => {
     BlogContorllers.deleteBlog(req, res);  
 })
 router.get("/all-blogs",(req, res) => {
     BlogContorllers.getAllBlogs(req, res);
 })
-router.get("/single-blog/:id", isAuthenticate, (req, res) => {
+router.get("/single-blog/:id", isAuthenticate,checkBlocked, (req, res) => {
     BlogContorllers.getSingleBlog(req, res);
 })
-router.get("/my-blogs", isAuthenticate, isAdmin("admin"), (req, res) => {
+router.get("/my-blogs", isAuthenticate,checkBlocked, isAdmin("admin"), (req, res) => {
     BlogContorllers.getMyBlogs(req, res);
 })
-router.put("/update/:id", isAuthenticate, isAdmin("admin"), (req, res) => {
+router.put("/update/:id", isAuthenticate,checkBlocked, isAdmin("admin"), (req, res) => {
     BlogContorllers.updateBlog(req, res);
     console.log("route is working...")
 })
+router.delete("/delete-all", isAuthenticate, isAdmin("admin"), async (req, res) => {
+    try {
+      await BlogContorllers.deleteAllBlogs(req, res);
+    } catch (error) {
+      res.status(500).json({ message: "Error deleting all blogs", error });
+    }
+  });
 
 module.exports = router;

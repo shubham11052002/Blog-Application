@@ -36,8 +36,26 @@ function Sidebar({ setComponent }) {
       toast.error(error.response?.data?.message || "Failed to logout");
     }
   };
-  const goToUserList = () => {
-    navigateTo('/admin/users');
+
+  const handleDeleteAllBlogs = async () => {
+    const confirmDelete = window.confirm("⚠️ Are you sure you want to delete ALL blogs? This action cannot be undone!");
+  
+    if (!confirmDelete) {
+      toast("Deletion cancelled");
+      return;
+    }
+  
+    try {
+      const res = await axios.delete("http://localhost:3001/delete-all", {
+        withCredentials: true,
+      });
+  
+      toast.success(res.data.message);
+      // Optionally refresh blog list
+    } catch (error) {
+      console.error("Delete all error:", error);
+      toast.error("Failed to delete all blogs");
+    }
   };
 
   return (
@@ -101,12 +119,13 @@ function Sidebar({ setComponent }) {
           >
             LOGOUT
           </button>
-          <button
-      onClick={goToUserList}
-      className="w-full px-4 py-2 bg-purple-500 rounded-lg hover:bg-purple-700 transition duration-300 text-white"
-    >
-      GO TO USER LIST
-    </button>
+    <button
+  onClick={handleDeleteAllBlogs}
+  className="w-full px-4 py-2 bg-orange-500 rounded-lg hover:bg-yellow-700 transition duration-300 text-white"
+>
+  Delete All Blogs
+</button>
+
         </ul>
       </div>
     </>

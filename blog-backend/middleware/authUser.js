@@ -51,4 +51,4 @@ module.exports = {
     isAuthenticate,
     isAdmin,
     checkBlocked,
-}
+  };
