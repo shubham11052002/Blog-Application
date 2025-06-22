@@ -10,7 +10,7 @@ const Hero = () => {
       {blogs && blogs.length > 0 ? (
         blogs.slice(0,4).map((element)=>{
           return ( 
-            <Link to={`/blog/${element._id}`} key={element._id} className='bg-white rounded-lg hover:shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 group relative'>
+            <Link to={`/blogs/${element._id}`} key={element._id} className='bg-white rounded-lg hover:shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 group relative'>
               <div className=' group relative'>
                 <img src={element.blogImage.url} alt="" className='w-full h-56 object-cover'/>
                 <div className='absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-75 group-hover:opacity-100 transition-transform duration-300'></div>
@@ -20,7 +20,7 @@ const Hero = () => {
                 <img src={element.adminPhoto} alt="" className='h-12 w-12 rounded-full border-2 border-yellow-400'/>
                 <div className='ml-4'>
                 <p className='text-lg font-semibold text-gray-800 '>{element.adminName}</p>
-                <p className='text-xs text-gray-400 font-light'><b>New  blog is here</b></p>
+                <p className='text-xs text-gray-400 font-light'><b>New  blogs is here</b></p>
                 </div>
               </div>
             </Link>

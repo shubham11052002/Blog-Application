@@ -7,7 +7,7 @@ import "react-multi-carousel/lib/styles.css";
 const Educational = () => {
   const { blogs } = useAuth();
   const educationalBlogs = Array.isArray(blogs)
-  ? blogs.filter((blog) => blog?.category?.toLowerCase() === "education")
+  ? blogs.filter((blogs) => blogs?.category?.toLowerCase() === "education")
   : [];
   const responsive = {
     superLargeDesktop: { breakpoint: { max: 4000, min: 3000 }, items: 5 },
@@ -33,21 +33,21 @@ const Educational = () => {
           showDots={false}
           itemClass="px-2"
         >
-          {educationalBlogs.slice(0, 9).map((blog, index) => (
+          {educationalBlogs.slice(0, 9).map((blogs, index) => (
             <div key={index} className="p-2">
               <Link
-                to={`/blog/${blog._id}`}
+                to={`/blogs/${blogs._id}`}
                 className="relative rounded-lg overflow-hidden shadow-md transform hover:scale-105 transition-transform duration-300 block"
               >
                 <img
-                  src={blog?.blogImage?.url || "/fallback.jpg"}
-                  alt={blog?.title}
+                  src={blogs?.blogImage?.url || "/fallback.jpg"}
+                  alt={blogs?.title}
                   className="w-full h-48 object-cover"
                 />
                 <div className="absolute inset-0 bg-black opacity-30"></div>
                 <div className="absolute bottom-4 left-4 text-white">
-                  <h2 className="text-lg font-semibold">{blog?.title}</h2>
-                  <p className="text-sm">{blog?.category}</p>
+                  <h2 className="text-lg font-semibold">{blogs?.title}</h2>
+                  <p className="text-sm">{blogs?.category}</p>
                 </div>
               </Link>
             </div>

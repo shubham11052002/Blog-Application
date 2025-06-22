@@ -45,11 +45,11 @@ const Trending = () => {
               key={element._id}
               className="p-4 bg-white border border-gray-400 rounded-lg shadow-md mx-2"
             >
-              <Link to={`/blog/${element._id}` }>
+              <Link to={`/blogs/${element._id}` }>
                 <div className="relative">
                   <img
                     src={element.blogImage.url}
-                    alt="blog"
+                    alt="blogs"
                     className="w-full h-56 object-cover rounded-t-lg"
                   />
                   <div className="absolute top-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full text-sm">

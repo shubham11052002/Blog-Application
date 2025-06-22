@@ -22,7 +22,7 @@ const Navbar = () => {
         { withCredentials: true }
       );
       toast.success(data.message);
-      localStorage.removeItem("jwt"); // deleting token in localStorage so that if user logged out it will go to login page
+      localStorage.removeItem("jwt"); 
       setIsAuthenticated(false);
       navigateTo("/login");
     } catch (error) {
@@ -51,7 +51,7 @@ const Navbar = () => {
     </div>
         </div>
      
-        {/* condotion for admin can only dashboard page */}
+        {/* condotion for admin can see only dashboard page */}
         <div className="space-x-2  font-bold hidden md:flex" >
           { isAuthenticated && profile?.role==="admin"?( <Link to="/dashboard" className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 transition">
     Dashboard
