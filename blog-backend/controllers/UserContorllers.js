@@ -130,7 +130,7 @@ const getAllUsers = async (req, res) => {
 
         const users = await User.find({ role: { $ne: 'admin' } }).select('-password');  // Exclude admins by filtering role
 
-        console.log("📤 Found users:", users);
+        // console.log("📤 Found users:", users);
 
         if (users.length > 0) {
             return res.status(200).json({ success: true, users });
@@ -144,18 +144,16 @@ const getAllUsers = async (req, res) => {
 };
 
 const blockUser = async (req, res) => {
-    try {
-      const { id } = req.params;
-      const { isBlocked } = req.body;
+    const user = await User.findById(req.params.id);
+    if (!user) return res.status(404).json({ message: "User not found" });
   
-      const user = await User.findByIdAndUpdate(id, { isBlocked }, { new: true });
+    user.isBlocked = !user.isBlocked;
+    await user.save();
   
-      if (!user) return res.status(404).json({ message: "User not found" });
-  
-      res.status(200).json({ message: `User has been ${isBlocked ? 'blocked' : 'unblocked'}` });
-    } catch (err) {
-      res.status(500).json({ message: "Server error" });
-    }
+    res.status(200).json({
+      message: user.isBlocked ? "User has been blocked" : "User has been unblocked",
+      user,
+    });
   };
 
   

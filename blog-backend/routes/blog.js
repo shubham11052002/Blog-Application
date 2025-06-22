@@ -2,7 +2,7 @@ const express = require("express")
 const router = express.Router();
 const BlogContorllers = require("../controllers/BlogControllers");
 const { isAuthenticate, isAdmin, checkBlocked } = require('../middleware/authUser');
-router.post("/create", isAuthenticate,checkBlocked, isAdmin("admin"), (req, res) => {
+router.post("/create", isAuthenticate,checkBlocked, (req, res) => {
     BlogContorllers.createBlog(req, res);
 })
 router.delete("/delete/:id", isAuthenticate,checkBlocked, isAdmin("admin"), (req, res) => {
@@ -14,7 +14,7 @@ router.get("/all-blogs",(req, res) => {
 router.get("/single-blog/:id", isAuthenticate,checkBlocked, (req, res) => {
     BlogContorllers.getSingleBlog(req, res);
 })
-router.get("/my-blogs", isAuthenticate,checkBlocked, isAdmin("admin"), (req, res) => {
+router.get("/my-blogs", isAuthenticate,checkBlocked, (req, res) => {
     BlogContorllers.getMyBlogs(req, res);
 })
 router.put("/update/:id", isAuthenticate,checkBlocked, isAdmin("admin"), (req, res) => {

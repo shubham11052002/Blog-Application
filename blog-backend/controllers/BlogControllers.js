@@ -113,20 +113,47 @@ const getMyBlogs = async (req, res) => {
 }
 const updateBlog = async (req, res) => {
     try {
-        const { id } = req.params;
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            return res.status(400).json({ error: "Invalid blog ID" });
-        }
-        const updatedBlog = await Blog.findByIdAndUpdate(id, req.body, { new: true });
-        if (!updatedBlog) {
-            return res.status(404).json({ error: "Blog not found" });
-        }
-        res.status(200).json({ message: "Blog updated successfully", updatedBlog });
+      const { id } = req.params;
+  
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ message: "Invalid blog ID" });
+      }
+  
+      const blog = await Blog.findById(id);
+      if (!blog) {
+        return res.status(404).json({ message: "Blog not found" });
+      }
+  
+      // Check if user is blog owner or admin
+      const isOwner = blog.createdBy.toString() === req.user._id.toString();
+      const isAdmin = req.user.role === "admin";
+  
+      if (!isOwner && !isAdmin) {
+        return res.status(403).json({ message: "You are not authorized to update this blog" });
+      }
+  
+      //Update text fields
+      blog.title = req.body.title || blog.title;
+      blog.category = req.body.category || blog.category;
+      blog.about = req.body.about || blog.about;
+  
+      // Update image if uploaded
+      if (req.file) {
+        const result = await uploadToCloudinary(req.file.path, "blogs");
+        blog.blogImage = {
+          public_id: result.public_id,
+          url: result.secure_url,
+        };
+      }
+  
+      await blog.save();
+  
+      res.status(200).json({ message: "Blog updated successfully", blog });
     } catch (error) {
-        console.error("Error updating blog:", error);
-        return res.status(500).json({ success: false, message: "Internal server error" });
+      console.error("Error updating blog:", error);
+      res.status(500).json({ message: "Internal server error" });
     }
-}
+  };
 
 const deleteAllBlogs = async (req, res) => {
     try {

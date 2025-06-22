@@ -57,13 +57,38 @@ const Navbar = () => {
     Dashboard
   </Link>):("")}
  
-   {!isAuthenticated ? ( <Link to="/login" className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition">
-    Login
-  </Link>): (
-    <div> 
-      <button onClick={handleLogout} className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition" >Logout</button>
+  {isAuthenticated ? (
+  <div className="relative group">
+    <img
+      src={profile?.photo?.url || "/default-avatar.png"}
+      alt="Profile"
+      className="w-10 h-10 rounded-full object-cover border-2 border-blue-500 cursor-pointer"
+    />
+
+    <div className="absolute right-0 mt-2 bg-white border shadow-lg rounded-md opacity-0 group-hover:opacity-100 transition duration-200 z-50 w-44">
+      <Link
+        to="/dashboard"
+        className="block px-4 py-2 hover:bg-blue-100 text-gray-700"
+      >
+        👤 View Profile
+      </Link>
+      <button
+        onClick={handleLogout}
+        className="w-full text-left px-4 py-2 hover:bg-red-100 text-red-600"
+      >
+        🚪 Logout
+      </button>
     </div>
-  )}
+  </div>
+) : (
+  <Link
+    to="/login"
+    className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition"
+  >
+    Login
+  </Link>
+)}
+
 </div>
       </div>
        {/* mobile navbar  */}

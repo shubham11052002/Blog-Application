@@ -32,7 +32,7 @@ function UpdateBlog() {
           withCredentials: true,
         });
         const data = res.data.blog;
-        console.log("Fetched data:", data);
+        // console.log("Fetched data:", data);
         setTitle(data.title || "");
         setCategory(data.category || "");
         setAbout(data.about || "");
