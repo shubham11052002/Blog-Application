@@ -7,7 +7,7 @@ import PopularCreators from "../home/PopularCreators.jsx"
 const Home = () => {
   return (
     <div className='bg-neutral-200'>
-      <Hero/>
+      <Hero  />
       <Trending/>
       <Educational/>
       <PopularCreators/>

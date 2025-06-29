@@ -6,7 +6,7 @@ const Hero = () => {
   const {blogs} = useAuth();
   // console.log(blogs)
   return (
-    <div className='container mx-auto my-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-6 '>
+    <div className='container mx-auto my-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-10'>
       {blogs && blogs.length > 0 ? (
         blogs.slice(0,4).map((element)=>{
           return ( 

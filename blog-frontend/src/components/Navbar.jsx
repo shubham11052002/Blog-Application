@@ -28,7 +28,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="bg-[#1e1e2e] text-white shadow-md fixed top-0 left-0 w-full z-50 px-6 py-3">
+      <nav className="bg-[#1e1e2e] text-white shadow-md fixed top-0 left-0 w-full z-50 px-6 py-3 ">
         <div className="flex justify-between items-center max-w-7xl mx-auto">
           <div className="text-2xl font-bold tracking-wide cursor-pointer">
             <span className="text-white">Penora⚡</span>
@@ -43,29 +43,29 @@ const Navbar = () => {
           </ul>
 
           <div className="hidden md:flex items-center gap-4">
-            {isAuthenticated && profile?.role === "admin" && (
-              <Link
-                to="/dashboard"
-                className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white px-4 py-2 rounded-lg hover:brightness-110 transition"
-              >
-                Dashboard
-              </Link>
-            )}
-
             {isAuthenticated ? (
               <div className="relative group">
                 <img
                   src={profile?.photo?.url || "/default-avatar.png"}
-                  alt="Profile"
+                  alt="User"
                   className="w-10 h-10 rounded-full object-cover border-2 border-blue-500 cursor-pointer"
                 />
                 <div className="absolute right-0 mt-2 bg-[#2c2c3b] border border-gray-700 shadow-lg rounded-md opacity-0 group-hover:opacity-100 transition duration-200 z-50 w-44">
-                  <Link
-                    to="/dashboard"
-                    className="block px-4 py-2 hover:bg-gray-700 text-white"
-                  >
-                    👤 View Profile
-                  </Link>
+                  {profile?.role === "admin" ? (
+                    <Link
+                      to="/dashboard"
+                      className="block px-4 py-2 hover:bg-gray-700 text-white"
+                    >
+                      🛠️ Dashboard
+                    </Link>
+                  ) : (
+                    <Link
+                      to="/dashboard"
+                      className="block px-4 py-2 hover:bg-gray-700 text-white"
+                    >
+                      👤 My Profile
+                    </Link>
+                  )}
                   <button
                     onClick={handleLogout}
                     className="w-full text-left px-4 py-2 hover:bg-red-600 text-red-400"
@@ -98,27 +98,28 @@ const Navbar = () => {
               <Link to="/about" onClick={() => setShow(false)} className="w-64 text-center px-6 py-3 rounded-md bg-gray-700 hover:bg-gray-600 transition">About</Link>
               <Link to="/contact" onClick={() => setShow(false)} className="w-64 text-center px-6 py-3 rounded-md bg-gray-700 hover:bg-gray-600 transition">Contact</Link>
 
-              {isAuthenticated && profile?.role === "admin" && (
-                <Link
-                  to="/dashboard"
-                  onClick={() => setShow(false)}
-                  className="w-64 text-center px-6 py-3 rounded-md bg-blue-700 hover:bg-blue-800 transition"
-                >
-                  Dashboard
-                </Link>
+              {isAuthenticated && (
+                <>
+                  <Link
+                    to="/dashboard"
+                    onClick={() => setShow(false)}
+                    className="w-64 text-center px-6 py-3 rounded-md bg-blue-700 hover:bg-blue-800 transition"
+                  >
+                    {profile?.role === "admin" ? "🛠️ Dashboard" : "👤 My Profile"}
+                  </Link>
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      setShow(false);
+                    }}
+                    className="w-64 px-6 py-3 rounded-md bg-red-600 text-white hover:bg-red-700 transition"
+                  >
+                    🚪 Logout
+                  </button>
+                </>
               )}
 
-              {isAuthenticated ? (
-                <button
-                  onClick={() => {
-                    handleLogout();
-                    setShow(false);
-                  }}
-                  className="w-64 px-6 py-3 rounded-md bg-red-600 text-white hover:bg-red-700 transition"
-                >
-                  🚪 Logout
-                </button>
-              ) : (
+              {!isAuthenticated && (
                 <Link
                   to="/login"
                   onClick={() => setShow(false)}
@@ -130,7 +131,7 @@ const Navbar = () => {
             </ul>
           </div>
         )}
-      </nav>
+      </nav >
     </>
   );
 };

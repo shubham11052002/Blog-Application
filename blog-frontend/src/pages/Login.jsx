@@ -10,32 +10,60 @@ const navigate = useNavigate()
   const [email,setEmail] = useState("")
   const [password,setPassword] = useState("")
   const [role,setRole] = useState("")
-  const handleLogin =  async (e) =>{
-    e.preventDefault()
-   if(!email || !password || !role){
-    toast.error("please fill all field")
-    return;
-   }
-    try {
-      const {data} = await axios.post("http://localhost:3001/login",{email,password,role},{
-        withCredentials:true,
-        headers:{
-          "Content-Type":"multipart/form-data",
-        },
-      })
-      console.log(data, "response data ...")
-      toast.success("✅ User Login sucessfully...")
-      setProfile(data)
-      setIsAuthenticated(true)
-      setEmail("")
-      setPassword("")
-      setRole("")
-      navigate("/")
-    } catch (error) {
-      console.log(error, 'error in Login...')
-      toast.error(error.response?.data?.message || "Login failed. Please try again.");
+  const handleLogin = async (e) => {
+    e.preventDefault();
+  
+    if (!email || !password || !role) {
+      toast.error("Please fill all fields");
+      return;
     }
-  }
+  
+    try {
+      const { data } = await axios.post(
+        "http://localhost:3001/login",
+        { email, password, role },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+  
+      toast.success("✅ User login successfully...");
+      setProfile(data.user);
+      setIsAuthenticated(true);
+      setEmail("");
+      setPassword("");
+      setRole("");
+      navigate("/");
+    } catch (error) {
+      const message = error.response?.data?.message || "Login failed. Please try again.";
+    
+      if (message.includes("blocked")) {
+        toast.custom((t) => (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-6 py-4 rounded-lg shadow-md max-w-md w-full">
+            <strong className="block text-lg mb-2">🚫 Access Denied</strong>
+            <span>{message}</span>
+            <div className="text-right mt-4">
+              <button
+                onClick={() => {
+                  toast.dismiss(t.id);
+                  navigate("/login");
+                }}
+                className="bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700 transition"
+              >
+                OK
+              </button>
+            </div>
+          </div>
+        ), { duration: 6000 });
+      } else {
+        toast.error(message);
+      }
+    }    
+  };
+  
    
   return (
     <div className="min-h-screen flex items-center justify-center bg-green-100">

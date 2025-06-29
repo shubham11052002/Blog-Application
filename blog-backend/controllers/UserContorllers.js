@@ -65,36 +65,53 @@ const Register = async (req, res) => {
 
 const Login = async (req, res) => {
     const { email, password, role } = req.body;
+  
     try {
-        if (!email || !password || !role) {
-            return res.status(400).send({ success: false, message: "please enter required fields" })
-        }
-        const user = await User.findOne({ email }).select(`+password`);
-        if (!user.password) {
-            return res.status(400).send({ message: "user password is missing" })
-        }
-        const isMAtch = await bcrypt.compare(password, user.password);
-        if (!isMAtch || !user) {
-            return res.status(400).send({ message: "Invalid email and password" })
-        }
-        if (user.role != role) {
-            return res.status(400).send({ message: `Given role ${role} not found` })
-        }
-        const token = await CreateTokenSvaeCokkies(user._id, res);
-        // console.log("Loogin token ", token)
-        return res.status(200).send({
-            message: "User login sucessfully", user: {
-                _id: user._id,
-                name: user.name,
-                email: user.email,
-                role: user.role,
-            }, token: token
-        })
+      if (!email || !password || !role) {
+        return res.status(400).send({ success: false, message: "Please enter required fields" });
+      }
+  
+      const user = await User.findOne({ email }).select("+password");
+  
+      if (!user) {
+        return res.status(400).send({ message: "User not found" });
+      }
+  
+      if (user.isBlocked) {
+        return res.status(403).send({
+          success: false,
+          message: "❌ You are blocked. Please contact the administrator.",
+        });
+      }
+  
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return res.status(400).send({ message: "Invalid email or password" });
+      }
+  
+      if (user.role !== role) {
+        return res.status(400).send({ message: `Given role ${role} not matched` });
+      }
+  
+      const token = await CreateTokenSvaeCokkies(user._id, res);
+  
+      return res.status(200).send({
+        message: "✅ User login successfully",
+        user: {
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          photo: user.photo,
+          role: user.role,
+        },
+        token: token,
+      });
     } catch (error) {
-        console.log(error)
-        return res.status(500).send({ success: false, messgae: "Interanl Sever Error in Login" })
+      console.log(error);
+      return res.status(500).send({ success: false, message: "Internal Server Error in Login" });
     }
-}
+  };
+  
 const Logout = async (req, res) => {
     try {
         res.clearCookie("jwt", { httpOnly: true });
