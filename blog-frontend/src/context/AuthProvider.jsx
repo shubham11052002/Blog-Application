@@ -34,6 +34,7 @@
         const fetchBlogs = async () =>{
             try {
                 const data = await axios.get("https://blog-application-23z7.onrender.com/all-blogs", {
+                withCredentials:true,
                 });
                 setBlogs(data.data.blogs);
                 // console.log("auth provider data " ,data)
