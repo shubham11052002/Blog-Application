@@ -27,7 +27,7 @@ function UpdateBlog() {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const res = await axios.get(`${baseURL}/blog/${id}`, {
+        const res = await axios.get(`${baseURL}/update/${id}`, {
           withCredentials: true,
         });
         const data = res.data.blog;
@@ -35,7 +35,7 @@ function UpdateBlog() {
         setTitle(data.title || "");
         setCategory(data.category || "");
         setAbout(data.about || "");
-        setBlogImagePreview(data.blogImage?.url || "/imgPL.webp");
+        setBlogImagePreview(data.blogImage?.url || "https://via.placeholder.com/400x250?text=Blog+Image");
       } catch (error) {
         console.error("Fetch blog error:", error?.response?.data || error.message);
         toast.error("Failed to load blog");
