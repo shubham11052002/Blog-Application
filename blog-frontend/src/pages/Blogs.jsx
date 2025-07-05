@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 function Blogs() {
   const [blogs, setBlogs] = useState([]);
   const baseURL = import.meta.env.VITE_BACKEND_URL;
+
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
@@ -21,12 +22,11 @@ function Blogs() {
   }, [baseURL]);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12">
+    <div className="max-w-7xl mx-auto px-4 py-12 mt-[72px]">
       <h1 className="text-4xl font-bold text-indigo-700 mb-10 text-center">
         📝 Explore Blogs
       </h1>
 
-      {/* Masonry / Pinterest-style columns layout */}
       <div className="columns-1 sm:columns-2 lg:columns-4 gap-4 space-y-6">
         {blogs.map((blog, index) => (
           <Link to={`/blogs/${blog._id}`} key={blog._id} className="block">
