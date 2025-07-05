@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
     const fetchProfile = async () => {
       try {
         const response = await axios.get(
-          `${baseURL}/profile`,
+          `${baseURL}/my-profile`,
           {
             withCredentials: true,
           }
