@@ -22,9 +22,9 @@ app.use(fileUpload(
     }
 ));
 app.use(cors({
-    origin: process.env.FRONT_END_URL,
+    origin: "https://blog-application-zdq6.vercel.app",
     credentials: true
-}));
+  }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
