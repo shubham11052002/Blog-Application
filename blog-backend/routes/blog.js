@@ -17,10 +17,13 @@ router.get("/single-blog/:id", isAuthenticate,checkBlocked, (req, res) => {
 router.get("/my-blogs", isAuthenticate,checkBlocked, (req, res) => {
     BlogContorllers.getMyBlogs(req, res);
 })
-router.put("/update/:id", isAuthenticate,checkBlocked, isAdmin("admin"), (req, res) => {
+router.get("/update/:id", isAuthenticate, checkBlocked,  (req, res) => {
+    BlogContorllers.getSingleBlog(req, res);
+});
+
+router.put("/update/:id", isAuthenticate, checkBlocked, (req, res) => {
     BlogContorllers.updateBlog(req, res);
-    console.log("route is working...")
-})
+});
 router.delete("/delete-all", isAuthenticate, isAdmin("admin"), async (req, res) => {
     try {
       await BlogContorllers.deleteAllBlogs(req, res);

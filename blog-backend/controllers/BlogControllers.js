@@ -124,7 +124,6 @@ const updateBlog = async (req, res) => {
         return res.status(404).json({ message: "Blog not found" });
       }
   
-      // Check if user is blog owner or admin
       const isOwner = blog.createdBy.toString() === req.user._id.toString();
       const isAdmin = req.user.role === "admin";
   
@@ -132,22 +131,27 @@ const updateBlog = async (req, res) => {
         return res.status(403).json({ message: "You are not authorized to update this blog" });
       }
   
-      //Update text fields
+      // Update fields
       blog.title = req.body.title || blog.title;
       blog.category = req.body.category || blog.category;
       blog.about = req.body.about || blog.about;
   
-      // Update image if uploaded
-      if (req.file) {
-        const result = await uploadToCloudinary(req.file.path, "blogs");
+      if (req.files && req.files.blogImage) {
+        const blogImage = req.files.blogImage;
+  
+        const allowedFormats = ["image/jpeg", "image/png", "image/webp", "image/jpg"];
+        if (!allowedFormats.includes(blogImage.mimetype)) {
+          return res.status(400).json({ message: "Invalid photo format" });
+        }
+  
+        const cloudinaryResponse = await cloudinary.uploader.upload(blogImage.tempFilePath);
         blog.blogImage = {
-          public_id: result.public_id,
-          url: result.secure_url,
+          public_id: cloudinaryResponse.public_id,
+          url: cloudinaryResponse.secure_url,
         };
       }
   
       await blog.save();
-  
       res.status(200).json({ message: "Blog updated successfully", blog });
     } catch (error) {
       console.error("Error updating blog:", error);

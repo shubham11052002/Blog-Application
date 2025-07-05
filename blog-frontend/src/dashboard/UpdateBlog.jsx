@@ -13,6 +13,7 @@ function UpdateBlog() {
   const [blogImage, setBlogImage] = useState(null);
   const [blogImagePreview, setBlogImagePreview] = useState("");
   const baseURL = import.meta.env.VITE_BACKEND_URL;
+
   const changePhotoHandler = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -24,6 +25,8 @@ function UpdateBlog() {
       };
     }
   };
+
+  // ✅ FETCH BLOG DATA
   useEffect(() => {
     const fetchBlog = async () => {
       try {
@@ -31,20 +34,20 @@ function UpdateBlog() {
           withCredentials: true,
         });
         const data = res.data.blog;
-        // console.log("Fetched data:", data);
         setTitle(data.title || "");
         setCategory(data.category || "");
         setAbout(data.about || "");
         setBlogImagePreview(data.blogImage?.url || "https://via.placeholder.com/400x250?text=Blog+Image");
       } catch (error) {
         console.error("Fetch blog error:", error?.response?.data || error.message);
-        toast.error("Failed to load blog");
+        toast.error(error?.response?.data?.message || "Failed to load blog");
       }
     };
 
     fetchBlog();
   }, [id]);
 
+  // ✅ SUBMIT UPDATED BLOG
   const handleUpdate = async (e) => {
     e.preventDefault();
 
@@ -61,7 +64,7 @@ function UpdateBlog() {
 
     try {
       const { data } = await axios.put(
-        `${baseURL}/${id}`,
+        `${baseURL}/update/${id}`, 
         formData,
         {
           withCredentials: true,
@@ -87,7 +90,7 @@ function UpdateBlog() {
             <label className="block mb-2 font-semibold">Category</label>
             <select
               className="w-full p-2 border rounded-md"
-              value={category} // Set value to the state variable
+              value={category}
               onChange={(e) => setCategory(e.target.value)}
             >
               <option value="">Select Category</option>
@@ -96,7 +99,7 @@ function UpdateBlog() {
               <option value="Education">Education</option>
               <option value="Entertainment">Entertainment</option>
               <option value="Business">Business</option>
-              <option value="Books">Books</option> {/* Ensure this category matches your data */}
+              <option value="Books">Books</option>
             </select>
           </div>
 
@@ -104,7 +107,7 @@ function UpdateBlog() {
             type="text"
             placeholder="BLOG MAIN TITLE"
             className="w-full p-2 mb-4 border rounded-md"
-            value={title} // Bind the input field to the state
+            value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
 
@@ -127,7 +130,7 @@ function UpdateBlog() {
             rows="6"
             className="w-full p-2 mb-4 border rounded-md"
             placeholder="Write something about your blog (at least 200 characters)"
-            value={about} // Bind the textarea field to the state
+            value={about}
             onChange={(e) => setAbout(e.target.value)}
           />
 
