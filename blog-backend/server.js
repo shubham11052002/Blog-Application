@@ -22,7 +22,7 @@ app.use(fileUpload(
     }
 ));
 app.use(cors({
-    origin: "https://blog-application-zdq6.vercel.app", // ✅ no trailing slash
+    origin: "https://blog-application-zdq6-l1pa3hwiz.vercel.app/", // ✅ no trailing slash
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"], // ✅ important!
