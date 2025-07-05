@@ -1,30 +1,33 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
-
 async function isAuthenticate(req, res, next) {
     try {
-        const token = req.cookies.jwt;
-        if (!token) {
-            return res.status(401).json({ message: "User not authenticated, no user found" });
-        }
-        console.log("authUserToken ", token)
-        const decoded = jwt.verify(token, process.env.JWT_TOKEN_SECRET_KEY);
-        console.log(decoded)
-        if (!decoded.userId) {
-            return res.status(401).json({ message: "Invalid token" });
-        }
-        const user = await User.findById(decoded.userId);  // Corrected query
-        console.log(user)
-        if (!user) {
-            return res.status(404).json({ message: "User not found" });
-        }
-        req.user = user;
-        next();
+      const token = req.cookies.jwt;
+  
+      if (!token) {
+        return res.status(401).json({ message: "User not authenticated, no token found" });
+      }
+  
+      // Decode token
+      const decoded = jwt.verify(token, process.env.JWT_TOKEN_SECRET_KEY);
+  
+      if (!decoded?.userId) {
+        return res.status(401).json({ message: "Invalid token payload" });
+      }
+  
+      const user = await User.findById(decoded.userId);
+  
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+  
+      req.user = user;
+      next();
     } catch (error) {
-        console.error("Error in authentication:", error.message);
-        return res.status(401).json({ message: "User is not authenticated", error: error.message });
+      console.error("Auth error:", error.message);
+      return res.status(401).json({ message: "Authentication failed", error: error.message });
     }
-}
+  }
 
 function isAdmin(...roles) {
     return (req, res, next) => {
