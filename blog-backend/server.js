@@ -22,20 +22,21 @@ app.use(fileUpload(
     }
 ));
 const allowedOrigins = [
-  process.env.FRONT_END_URL,
-  "http://localhost:5173"
+  "https://blog-application-zdq6.vercel.app",
+  "http://localhost:5173",
 ];
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
+      if (!origin || allowedOrigins.some(o => origin.startsWith(o))) {
         callback(null, true);
       } else {
+        console.error("❌ CORS error: Blocked origin →", origin);
         callback(new Error("CORS error: Not allowed"));
       }
     },
-    credentials: true, // ✅ Allow sending cookies
+    credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
