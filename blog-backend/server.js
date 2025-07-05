@@ -22,8 +22,7 @@ app.use(fileUpload(
     }
 ));
 const allowedOrigins = [
-  "https://blog-application-zdq6-l1pa3hwiz.vercel.app",
-  "https://blog-application-zdq6.vercel.app",
+  process.env.FRONT_END_URL,
   "http://localhost:5173"
 ];
 
