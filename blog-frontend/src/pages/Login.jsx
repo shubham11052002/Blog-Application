@@ -10,6 +10,7 @@ const navigate = useNavigate()
   const [email,setEmail] = useState("")
   const [password,setPassword] = useState("")
   const [role,setRole] = useState("")
+  const baseURL = import.meta.env.VITE_BACKEND_URL;
   const handleLogin = async (e) => {
     e.preventDefault();
   
@@ -20,7 +21,7 @@ const navigate = useNavigate()
   
     try {
       const { data } = await axios.post(
-        "https://blog-application-23z7.onrender.com/login",
+        `${baseURL}/login`,
         { email, password, role },
         {
           withCredentials: true,

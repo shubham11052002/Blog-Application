@@ -3,10 +3,11 @@ import axios from "axios";
 
 function About() {
   const [profile,setProfile] = useState([]);
+  const baseURL = import.meta.env.VITE_BACKEND_URL;
   useEffect(() => {
     const fetchAdmins = async () => {
       try {
-        const { data } = await axios.get("https://blog-application-23z7.onrender.com/my-profile", {
+        const { data } = await axios.get(`${baseURL}/my-profile`, {
           withCredentials: true,
         });
         console.log(data.user, "profile data");
@@ -16,7 +17,7 @@ function About() {
       }
     };
     fetchAdmins();
-  }, []);
+  }, [baseURL]);
 
   return (
     <div className="container mx-auto my-12 px-6 md:px-12 space-y-10">

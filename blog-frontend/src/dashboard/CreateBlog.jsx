@@ -8,7 +8,7 @@ function CreateBlog() {
   const [about, setAbout] = useState("");
   const [blogImage, setBlogImage] = useState("");
   const [blogImagePreview, setBlogImagePreview] = useState("");
-
+  const baseURL = import.meta.env.VITE_BACKEND_URL;
   const changePhotoHandler = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -28,7 +28,7 @@ function CreateBlog() {
     formData.append("blogImage", blogImage);
 
     try {
-      const { data } = await axios.post("https://blog-application-23z7.onrender.com/create", formData, {
+      const { data } = await axios.post(`${baseURL}/create`, formData, {
         withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
       });

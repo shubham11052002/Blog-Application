@@ -18,10 +18,10 @@ const Sidebar = ({ setComponent }) => {
   const { profile, setIsAuthenticated } = useAuth();
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
-
+  const baseURL = import.meta.env.VITE_BACKEND_URL;
   const logoutHandler = async () => {
     try {
-      const { data } = await axios.get("https://blog-application-23z7.onrender.com/logout", {
+      const { data } = await axios.get(`${baseURL}/logout`, {
         withCredentials: true,
       });
       toast.success(data.message);
@@ -43,7 +43,7 @@ const Sidebar = ({ setComponent }) => {
             onClick={async () => {
               toast.dismiss(t.id);
               try {
-                const res = await axios.delete("https://blog-application-23z7.onrender.com/delete-all", {
+                const res = await axios.delete(`${baseURL}/delete-all`, {
                   withCredentials: true,
                 });
                 toast.success(res.data.message);

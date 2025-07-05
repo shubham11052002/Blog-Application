@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 
 function Blogs() {
   const [blogs, setBlogs] = useState([]);
-
+  const baseURL = import.meta.env.VITE_BACKEND_URL;
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const { data } = await axios.get("https://blog-application-23z7.onrender.com/all-blogs", {
+        const { data } = await axios.get(`${baseURL}/all-blogs`, {
           withCredentials: true,
         });
         setBlogs(data.blogs);
@@ -18,7 +18,7 @@ function Blogs() {
     };
 
     fetchBlogs();
-  }, []);
+  }, [baseURL]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">

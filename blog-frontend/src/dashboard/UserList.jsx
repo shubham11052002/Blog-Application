@@ -7,12 +7,12 @@ const UserList = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-
+  const baseURL = import.meta.env.VITE_BACKEND_URL;
   const usersPerPage = 5;
 
   const fetchUsers = async () => {
     try {
-      const { data } = await axios.get("https://blog-application-23z7.onrender.com/users", {
+      const { data } = await axios.get(`${baseURL}/users`, {
         withCredentials: true,
       });
       setUsers(data.users);
@@ -23,12 +23,12 @@ const UserList = () => {
 
   useEffect(() => {
     fetchUsers();
-  }, []);
+  }, [baseURL]);
 
   const handleBlockToggle = async (userId) => {
     try {
       const { data } = await axios.put(
-        `https://blog-application-23z7.onrender.com/block/${userId}`,
+        `${baseURL}/block/${userId}`,
         {},
         { withCredentials: true }
       );

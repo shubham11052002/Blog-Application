@@ -9,11 +9,12 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  const baseURL = import.meta.env.VITE_BACKEND_URL;
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const response = await axios.get(
-          "https://blog-application-23z7.onrender.com/my-profile",
+          `${baseURL}/profile`,
           {
             withCredentials: true,
           }
@@ -33,7 +34,7 @@ export const AuthProvider = ({ children }) => {
     const fetchBlogs = async () => {
       try {
         const data = await axios.get(
-          "https://blog-application-23z7.onrender.com/all-blogs",
+          `${baseURL}/all-blogs`,
           {
             withCredentials: true,
           }
@@ -49,7 +50,7 @@ export const AuthProvider = ({ children }) => {
 
     fetchProfile();
     fetchBlogs();
-  }, []);
+  }, [baseURL]);
 
   return (
     <AuthContext.Provider

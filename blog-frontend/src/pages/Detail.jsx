@@ -10,7 +10,8 @@ export const Detail = () => {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const res = await axios.get(`https://blog-application-23z7.onrender.com/single-blog/${id}`, {
+        const baseURL = import.meta.env.VITE_BACKEND_URL;
+        const res = await axios.get(`${baseURL}/single-blog/${id}`, {
           withCredentials: true,
         });
         setBlogs(res.data.blog);

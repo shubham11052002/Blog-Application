@@ -3,12 +3,13 @@ import React, { useEffect, useState } from "react";
 
 function Creators() {
   const [creators, setCreators] = useState([]);
+  const baseURL = import.meta.env.VITE_BACKEND_URL;
   console.log(creators);
   useEffect(() => {
     const fetchCreators = async () => {
       try {
         const { data } = await axios.get(
-          "https://blog-application-23z7.onrender.com/admins",
+          `${baseURL}/admins`,
           {
             withCredentials: true,
           }
@@ -19,7 +20,7 @@ function Creators() {
       }
     };
     fetchCreators();
-  }, []);
+  }, [baseURL]);
 
   return (
     <div className="flex flex-wrap justify-center items-center my-20 bg-gray-100">

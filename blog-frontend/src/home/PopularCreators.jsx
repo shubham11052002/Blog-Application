@@ -5,16 +5,17 @@ import { Link } from 'react-router-dom';
 
 const PupularCreators = () => {
   const [admin , setAdmin] = useState([]);
+  const baseURL = import.meta.env.VITE_BACKEND_URL;
   useEffect(()=>{
   const fetchAdmins = async () =>{
-    const {data} = await axios.get("https://blog-application-23z7.onrender.com/admins",{
+    const {data} = await axios.get(`${baseURL}/admins`,{
       withCredentials:true,
     });
     // console.log(data.admins, "admins data ")
     setAdmin(data.admins)
   }
   fetchAdmins();
-  },[]);
+  },[baseURL]);
   return (
     <div className='container mx-auto p-4 '>
       <h1 className='text-2xl font-semibold mb-9'>Popular Creators</h1>

@@ -16,6 +16,7 @@ const navigateTo = useNavigate()
   const [education,setEducation] = useState("")
   const [photo,setPhoto] = useState("")
   const [photoPreview,setPhotoPreview] = useState("")
+  const baseURL = import.meta.env.VITE_BACKEND_URL;
   
   const photoHandler = (e) =>{
     // console.log(e)
@@ -45,7 +46,7 @@ const navigateTo = useNavigate()
     formData.append('education',education)
     formData.append('photo',photo)
     try {
-      const {data} = await axios.post("https://blog-application-23z7.onrender.com/register",formData,{
+      const {data} = await axios.post(`${baseURL}/register`,formData,{
         withCredentials:true,
         headers:{
           "Content-Type":"multipart/form-data",

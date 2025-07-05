@@ -12,7 +12,7 @@ function UpdateBlog() {
   const [about, setAbout] = useState("");
   const [blogImage, setBlogImage] = useState(null);
   const [blogImagePreview, setBlogImagePreview] = useState("");
-
+  const baseURL = import.meta.env.VITE_BACKEND_URL;
   const changePhotoHandler = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -28,7 +28,7 @@ function UpdateBlog() {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const res = await axios.get(`https://blog-application-23z7.onrender.com/single-blog/${id}`, {
+        const res = await axios.get(`${baseURL}/${id}`, {
           withCredentials: true,
         });
         const data = res.data.blog;
@@ -62,7 +62,7 @@ function UpdateBlog() {
 
     try {
       const { data } = await axios.put(
-        `https://blog-application-23z7.onrender.com/update/${id}`,
+        `${baseURL}/${id}`,
         formData,
         {
           withCredentials: true,

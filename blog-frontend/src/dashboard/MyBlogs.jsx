@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 
 function MyBlogs() {
   const [myBlogs, setMyBlogs] = useState([]);
-
+  const baseURL = import.meta.env.VITE_BACKEND_URL;
   useEffect(() => {
     const fetchMyBlogs = async () => {
       try {
-        const { data } = await axios.get("https://blog-application-23z7.onrender.com/my-blogs", {
+        const { data } = await axios.get(`${baseURL}/my-blogs`, {
           withCredentials: true,
         });
         // console.log("Fetched from backend:", data);
@@ -22,11 +22,11 @@ function MyBlogs() {
     };
 
     fetchMyBlogs();
-  }, []);
+  }, [baseURL]);
 
   const handleDelete = async (id) => {
     try {
-      const res = await axios.delete(`https://blog-application-23z7.onrender.com/delete/${id}`, {
+      const res = await axios.delete(`${baseURL}/delete/${id}`, {
         withCredentials: true,
       });
       toast.success(res.data.message || "Blog deleted successfully");

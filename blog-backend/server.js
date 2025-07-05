@@ -23,7 +23,8 @@ app.use(fileUpload(
 ));
 const allowedOrigins = [
     "https://blog-application-zdq6-l1pa3hwiz.vercel.app",
-    "https://blog-application-zdq6.vercel.app"
+    "https://blog-application-zdq6.vercel.app",
+    "http://localhost:5173" 
   ];
   
   app.use(cors({
@@ -37,7 +38,7 @@ const allowedOrigins = [
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
-  }));
+  }));  
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

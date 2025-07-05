@@ -10,11 +10,12 @@ const Navbar = () => {
   const [show, setShow] = useState(false);
   const { profile, isAuthenticated, setIsAuthenticated } = useAuth();
   const navigateTo = useNavigate();
+  const baseURL = import.meta.env.VITE_BACKEND_URL;
 
   const handleLogout = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.get("https://blog-application-23z7.onrender.com/logout", {
+      const { data } = await axios.get(`${baseURL}/logout`, {
         withCredentials: true,
       });
       toast.success(data.message);
