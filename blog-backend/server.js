@@ -23,7 +23,8 @@ app.use(fileUpload(
 ));
 app.use(cors({
     origin: process.env.FRONT_END_URL?.replace(/\/$/, ''), 
-    credentials: true
+    credentials: true,
+    headers: { "Content-Type": "multipart/form-data" }
   }));
 app.use(cookieParser());
 app.use(express.json());
