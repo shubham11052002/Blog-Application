@@ -29,7 +29,6 @@ const navigate = useNavigate()
           },
         }
       );
-  
       toast.success("✅ User login successfully...");
       setProfile(data.user);
       setIsAuthenticated(true);

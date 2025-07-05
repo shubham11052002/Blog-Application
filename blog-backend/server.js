@@ -23,20 +23,14 @@ app.use(fileUpload(
 ));
 const allowedOrigins = [
     "https://blog-application-zdq6-l1pa3hwiz.vercel.app",
-    "https://blog-application-zdq6.vercel.app", 
+    "https://blog-application-zdq6.vercel.app"
   ];
   
   app.use(cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("CORS error: Not allowed"));
-      }
-    },
+    origin: allowedOrigins,
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    allowedHeaders: ["Content-Type", "Authorization"]
   }));
 app.use(cookieParser());
 app.use(express.json());
