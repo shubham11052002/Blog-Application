@@ -22,9 +22,10 @@ app.use(fileUpload(
     }
 ));
 app.use(cors({
-    origin: process.env.FRONT_END_URL?.replace(/\/$/, ''), 
+    origin: "https://blog-application-zdq6.vercel.app", // ✅ no trailing slash
     credentials: true,
-    headers: { "Content-Type": "multipart/form-data" }
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"], // ✅ important!
   }));
 app.use(cookieParser());
 app.use(express.json());
