@@ -24,11 +24,10 @@ function UpdateBlog() {
       };
     }
   };
-
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const res = await axios.get(`${baseURL}/${id}`, {
+        const res = await axios.get(`${baseURL}/blog/${id}`, {
           withCredentials: true,
         });
         const data = res.data.blog;

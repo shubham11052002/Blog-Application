@@ -22,8 +22,8 @@ app.use(fileUpload(
     }
 ));
 const allowedOrigins = [
-  "https://blog-application-zdq6.vercel.app",
-  "http://localhost:5173",
+    "https://blog-application-zdq6.vercel.app",
+    "http://localhost:5173",
 ];
 
 app.use(
