@@ -21,11 +21,22 @@ app.use(fileUpload(
         tempFileDir: "/tmp/"
     }
 ));
-app.use(cors({
-    origin: "https://blog-application-zdq6-l1pa3hwiz.vercel.app/", // ✅ no trailing slash
+const allowedOrigins = [
+    "https://blog-application-zdq6-l1pa3hwiz.vercel.app",
+    "https://blog-application-zdq6.vercel.app", 
+  ];
+  
+  app.use(cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("CORS error: Not allowed"));
+      }
+    },
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"], // ✅ important!
+    allowedHeaders: ["Content-Type", "Authorization"],
   }));
 app.use(cookieParser());
 app.use(express.json());
