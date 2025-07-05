@@ -11,7 +11,7 @@
     useEffect(()=>{
         const fetchProfile = async () => {
             try {
-              const response = await axios.get("http://localhost:3001/my-profile", {
+              const response = await axios.get("https://blog-application-23z7.onrender.com/my-profile", {
                 withCredentials: true,
                 headers: {
                   "Content-Type": "application/json"
@@ -33,7 +33,7 @@
           
         const fetchBlogs = async () =>{
             try {
-                const data = await axios.get("http://localhost:3001/all-blogs", {
+                const data = await axios.get("https://blog-application-23z7.onrender.com/all-blogs", {
                 });
                 setBlogs(data.data.blogs);
                 // console.log("auth provider data " ,data)

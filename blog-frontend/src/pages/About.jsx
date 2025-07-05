@@ -6,7 +6,7 @@ function About() {
   useEffect(() => {
     const fetchAdmins = async () => {
       try {
-        const { data } = await axios.get("http://localhost:3001/my-profile", {
+        const { data } = await axios.get("https://blog-application-23z7.onrender.com/my-profile", {
           withCredentials: true,
         });
         console.log(data.user, "profile data");

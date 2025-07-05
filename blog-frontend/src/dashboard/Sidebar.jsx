@@ -21,7 +21,7 @@ const Sidebar = ({ setComponent }) => {
 
   const logoutHandler = async () => {
     try {
-      const { data } = await axios.get("http://localhost:3001/logout", {
+      const { data } = await axios.get("https://blog-application-23z7.onrender.com/logout", {
         withCredentials: true,
       });
       toast.success(data.message);
@@ -43,7 +43,7 @@ const Sidebar = ({ setComponent }) => {
             onClick={async () => {
               toast.dismiss(t.id);
               try {
-                const res = await axios.delete("http://localhost:3001/delete-all", {
+                const res = await axios.delete("https://blog-application-23z7.onrender.com/delete-all", {
                   withCredentials: true,
                 });
                 toast.success(res.data.message);

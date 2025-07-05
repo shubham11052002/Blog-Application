@@ -17,6 +17,7 @@ function Contact() {
       name: data.username,
       email: data.email,
       message: data.message,
+      redirect: "https://yourdomain.com/thank-you",
     };
     try {
       await axios.post("https://api.web3forms.com/submit", userInfo);

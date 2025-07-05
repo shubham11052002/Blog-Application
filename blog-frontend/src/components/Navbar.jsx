@@ -14,7 +14,7 @@ const Navbar = () => {
   const handleLogout = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.get("http://localhost:3001/logout", {
+      const { data } = await axios.get("https://blog-application-23z7.onrender.com/logout", {
         withCredentials: true,
       });
       toast.success(data.message);

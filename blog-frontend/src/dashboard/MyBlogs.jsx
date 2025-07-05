@@ -9,7 +9,7 @@ function MyBlogs() {
   useEffect(() => {
     const fetchMyBlogs = async () => {
       try {
-        const { data } = await axios.get("http://localhost:3001/my-blogs", {
+        const { data } = await axios.get("https://blog-application-23z7.onrender.com/my-blogs", {
           withCredentials: true,
         });
         // console.log("Fetched from backend:", data);
@@ -26,7 +26,7 @@ function MyBlogs() {
 
   const handleDelete = async (id) => {
     try {
-      const res = await axios.delete(`http://localhost:3001/delete/${id}`, {
+      const res = await axios.delete(`https://blog-application-23z7.onrender.com/delete/${id}`, {
         withCredentials: true,
       });
       toast.success(res.data.message || "Blog deleted successfully");

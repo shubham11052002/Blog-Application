@@ -7,7 +7,7 @@ const PupularCreators = () => {
   const [admin , setAdmin] = useState([]);
   useEffect(()=>{
   const fetchAdmins = async () =>{
-    const {data} = await axios.get("http://localhost:3001/admins",{
+    const {data} = await axios.get("https://blog-application-23z7.onrender.com/admins",{
       withCredentials:true,
     });
     // console.log(data.admins, "admins data ")

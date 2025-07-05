@@ -8,7 +8,7 @@ function Blogs() {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const { data } = await axios.get("http://localhost:3001/all-blogs", {
+        const { data } = await axios.get("https://blog-application-23z7.onrender.com/all-blogs", {
           withCredentials: true,
         });
         setBlogs(data.blogs);

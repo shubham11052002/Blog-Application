@@ -28,7 +28,7 @@ function UpdateBlog() {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const res = await axios.get(`http://localhost:3001/single-blog/${id}`, {
+        const res = await axios.get(`https://blog-application-23z7.onrender.com/single-blog/${id}`, {
           withCredentials: true,
         });
         const data = res.data.blog;
@@ -62,7 +62,7 @@ function UpdateBlog() {
 
     try {
       const { data } = await axios.put(
-        `http://localhost:3001/update/${id}`,
+        `https://blog-application-23z7.onrender.com/update/${id}`,
         formData,
         {
           withCredentials: true,

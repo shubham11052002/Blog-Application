@@ -45,7 +45,7 @@ const navigateTo = useNavigate()
     formData.append('education',education)
     formData.append('photo',photo)
     try {
-      const {data} = await axios.post("http://localhost:3001/register",formData,{
+      const {data} = await axios.post("https://blog-application-23z7.onrender.com/register",formData,{
         withCredentials:true,
         headers:{
           "Content-Type":"multipart/form-data",

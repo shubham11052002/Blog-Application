@@ -12,7 +12,7 @@ const UserList = () => {
 
   const fetchUsers = async () => {
     try {
-      const { data } = await axios.get("http://localhost:3001/users", {
+      const { data } = await axios.get("https://blog-application-23z7.onrender.com/users", {
         withCredentials: true,
       });
       setUsers(data.users);
@@ -28,7 +28,7 @@ const UserList = () => {
   const handleBlockToggle = async (userId) => {
     try {
       const { data } = await axios.put(
-        `http://localhost:3001/block/${userId}`,
+        `https://blog-application-23z7.onrender.com/block/${userId}`,
         {},
         { withCredentials: true }
       );

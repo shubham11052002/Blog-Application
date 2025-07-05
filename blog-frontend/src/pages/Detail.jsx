@@ -10,7 +10,7 @@ export const Detail = () => {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const res = await axios.get(`http://localhost:3001/single-blog/${id}`, {
+        const res = await axios.get(`https://blog-application-23z7.onrender.com/single-blog/${id}`, {
           withCredentials: true,
         });
         setBlogs(res.data.blog);
