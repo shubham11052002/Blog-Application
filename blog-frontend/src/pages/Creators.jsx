@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Creators() {
   const [creators, setCreators] = useState([]);
@@ -20,37 +21,36 @@ function Creators() {
   }, [baseURL]);
 
   return (
-    <div className="flex flex-wrap justify-center items-center my-20 bg-gray-100">
+    <div className="flex flex-wrap justify-center items-center my-10 gap-6 bg-gray-100 px-4">
       {creators.map((creator) => (
-        <div
+        <Link
+          to={`/creator/${creator._id}`}
           key={creator._id}
-          className="bg-white shadow-lg rounded-lg overflow-hidden max-w-xs w-full m-4"
+          className="w-72 bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300"
         >
-          <div className="relative w-full h-36 overflow-hidden">
+          <div className="relative h-32 w-full overflow-hidden rounded-t-xl">
             <img
               src={creator.photo.url}
               alt="background"
-              className="absolute inset-0 w-full h-full object-cover"
+              className="w-full h-full object-cover"
             />
+            <div className="absolute inset-x-0 bottom-[-24px] flex justify-center">
+              <img
+                src={creator.photo.url}
+                alt="avatar"
+                className="w-16 h-16 rounded-full border-4 border-white shadow-md"
+              />
+            </div>
           </div>
-
-          <div className="relative -mt-10">
-            <img
-              src={creator.photo.url}
-              alt="avatar"
-              className="w-20 h-20 rounded-full mx-auto border-4 border-white shadow-md"
-            />
-          </div>
-
-          <div className="px-4 py-6">
-            <h2 className="text-center text-xl font-semibold text-gray-800">
+          <div className="pt-10 pb-4 px-4 text-center">
+            <h2 className="text-lg font-semibold text-gray-800">
               {creator.name}
             </h2>
-            <p className="text-center text-gray-600 mt-2">{creator.email}</p>
-            <p className="text-center text-gray-600 mt-2">{creator.phone}</p>
-            <p className="text-center text-gray-600 mt-2">{creator.role}</p>
+            <p className="text-sm text-gray-600">{creator.email}</p>
+            <p className="text-sm text-gray-600">{creator.phone}</p>
+            <p className="text-sm text-gray-600">{creator.role}</p>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );
