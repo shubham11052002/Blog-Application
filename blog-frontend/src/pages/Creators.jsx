@@ -21,30 +21,29 @@ function Creators() {
   }, [baseURL]);
 
   return (
-    <div className="flex flex-wrap justify-center items-start gap-4 bg-gray-100 px-4 pt-[80px] pb-10 min-h-screen">
+    <div className="flex flex-wrap justify-center items-start gap-6 bg-gray-100 px-4 pt-[80px] pb-10 min-h-screen">
       {creators.map((creator) => (
         <Link
           to={`/creator/${creator._id}`}
           key={creator._id}
-          className="w-60 h-[320px] rounded-xl overflow-hidden shadow-xl relative group"
+          className="w-60 rounded-xl overflow-hidden shadow-md bg-white hover:shadow-xl transition duration-300"
         >
-         
-          <div className="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-40 transition-all duration-300">
-          <img
-            src={creator.photo.url}
-            alt="background"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
+          <div className="w-full h-32">
+            <img
+              src={creator.photo.url}
+              alt="background"
+              className="w-full h-full object-cover"
+            />
           </div>
-          <div className="absolute top-4 left-1/2 transform -translate-x-1/2">
+          <div className="flex flex-col items-center px-4 py-4">
             <img
               src={creator.photo.url}
               alt="avatar"
-              className="w-16 h-16 rounded-full border-4 border-white shadow-lg object-cover"
+              className="w-16 h-16 rounded-full border-4 border-white -mt-8 object-cover shadow-md"
             />
-          </div>
-          <div className="absolute bottom-0 w-full bg-white bg-opacity-95 px-3 py-4 text-center">
-            <h2 className="text-sm font-bold text-gray-800">{creator.name}</h2>
+            <h2 className="text-sm font-semibold text-gray-800 mt-2">
+              {creator.name}
+            </h2>
             <p className="text-xs text-gray-600">{creator.email}</p>
             <p className="text-xs text-gray-600">{creator.phone}</p>
             <p className="text-xs text-gray-600">{creator.role}</p>
