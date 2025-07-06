@@ -21,28 +21,29 @@ function Creators() {
   }, [baseURL]);
 
   return (
-    <div className="flex flex-wrap justify-center items-center my-10 gap-6 bg-gray-100 px-4">
+    <div className="flex flex-wrap justify-center items-start gap-6 bg-gray-100 px-4 pt-[80px] pb-10 min-h-screen">
       {creators.map((creator) => (
         <Link
           to={`/creator/${creator._id}`}
           key={creator._id}
-          className="w-72 bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300"
+          className="w-72 h-[360px] relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
+          style={{
+            backgroundImage: `url(${creator.photo.url})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
         >
-          <div className="relative h-32 w-full overflow-hidden rounded-t-xl">
+          <div className="absolute inset-0 bg-black bg-opacity-40 backdrop-blur-sm"></div>
+
+          <div className="absolute top-4 left-0 right-0 flex justify-center">
             <img
               src={creator.photo.url}
-              alt="background"
-              className="w-full h-full object-cover"
+              alt="avatar"
+              className="w-20 h-20 rounded-full border-4 border-white shadow-lg"
             />
-            <div className="absolute inset-x-0 bottom-[-24px] flex justify-center">
-              <img
-                src={creator.photo.url}
-                alt="avatar"
-                className="w-16 h-16 rounded-full border-4 border-white shadow-md"
-              />
-            </div>
           </div>
-          <div className="pt-10 pb-4 px-4 text-center">
+
+          <div className="absolute bottom-0 w-full bg-white bg-opacity-90 px-4 py-6 text-center">
             <h2 className="text-lg font-semibold text-gray-800">
               {creator.name}
             </h2>
