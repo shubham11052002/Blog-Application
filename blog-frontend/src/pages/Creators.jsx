@@ -4,16 +4,13 @@ import React, { useEffect, useState } from "react";
 function Creators() {
   const [creators, setCreators] = useState([]);
   const baseURL = import.meta.env.VITE_BACKEND_URL;
-  console.log(creators);
+
   useEffect(() => {
     const fetchCreators = async () => {
       try {
-        const { data } = await axios.get(
-          `${baseURL}/admins`,
-          {
-            withCredentials: true,
-          }
-        );
+        const { data } = await axios.get(`${baseURL}/admins`, {
+          withCredentials: true,
+        });
         setCreators(data.admins);
       } catch (error) {
         console.log(error);
@@ -27,23 +24,25 @@ function Creators() {
       {creators.map((creator) => (
         <div
           key={creator._id}
-          className="bg-white shadow-lg rounded-lg overflow-hidden max-w-xs w-full m-2"
+          className="bg-white shadow-lg rounded-lg overflow-hidden max-w-xs w-full m-4"
         >
-          <div className="relative">
+          <div className="relative w-full h-36 overflow-hidden">
+            <img
+              src={creator.photo.url}
+              alt="background"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          </div>
+
+          <div className="relative -mt-10">
             <img
               src={creator.photo.url}
               alt="avatar"
-              className="w-full h-32 object-cover"
+              className="w-20 h-20 rounded-full mx-auto border-4 border-white shadow-md"
             />
-            <div className="absolute inset-x-0 bottom-0 transform translate-y-1/2">
-              <img
-                src={creator.photo.url}
-                alt="avatar"
-                className="w-16 h-16 rounded-full mx-auto border-4 border-gray-700"
-              />
-            </div>
           </div>
-          <div className="px-4 py-6 mt-4">
+
+          <div className="px-4 py-6">
             <h2 className="text-center text-xl font-semibold text-gray-800">
               {creator.name}
             </h2>
