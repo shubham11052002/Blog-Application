@@ -28,12 +28,14 @@ function Creators() {
           key={creator._id}
           className="w-60 h-[320px] rounded-xl overflow-hidden shadow-xl relative group"
         >
+         
+          <div className="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-40 transition-all duration-300">
           <img
             src={creator.photo.url}
             alt="background"
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-40 transition-all duration-300"></div>
+          </div>
           <div className="absolute top-4 left-1/2 transform -translate-x-1/2">
             <img
               src={creator.photo.url}
