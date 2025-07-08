@@ -4,47 +4,31 @@ import { BsYoutube } from "react-icons/bs";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#1e1e2e] text-white py-12 border-t border-gray-700">
-      <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 px-6">
-        <div>
-          <h2 className="text-xl font-semibold mb-4 text-gray-200">Products</h2>
-          <ul className="space-y-2 text-gray-400">
-            <li><a href="#" className="hover:text-indigo-400 transition duration-300">Flutter</a></li>
-            <li><a href="#" className="hover:text-indigo-400 transition duration-300">React</a></li>
-            <li><a href="#" className="hover:text-indigo-400 transition duration-300">Android</a></li>
-            <li><a href="#" className="hover:text-indigo-400 transition duration-300">iOS</a></li>
-          </ul>
+    <footer className="bg-[#1e1e2e] text-white py-8 px-4 w-full mt-auto">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="text-center md:text-left">
+          <h2 className="text-2xl font-bold text-white">Penora</h2>
+          <p className="text-sm text-gray-400 mt-1">
+            Empowering creators & developers.
+          </p>
         </div>
 
-        <div>
-          <h2 className="text-xl font-semibold mb-4 text-gray-200">Design to Code</h2>
-          <ul className="space-y-2 text-gray-400">
-            <li><a href="#" className="hover:text-indigo-400 transition duration-300">Figma Plugin</a></li>
-            <li><a href="#" className="hover:text-indigo-400 transition duration-300">Templates</a></li>
-          </ul>
+        <div className="flex space-x-6 text-xl text-gray-400">
+          <a href="#" className="hover:text-indigo-400 transition">
+            <FaGithub />
+          </a>
+          <a href="#" className="hover:text-indigo-400 transition">
+            <FaLinkedin />
+          </a>
+          <a href="#" className="hover:text-indigo-400 transition">
+            <BsYoutube />
+          </a>
         </div>
 
-        <div>
-          <h2 className="text-xl font-semibold mb-4 text-gray-200">Comparison</h2>
-          <ul className="space-y-2 text-gray-400">
-            <li><a href="#" className="hover:text-indigo-400 transition duration-300">DhiWise vs Anima</a></li>
-            <li><a href="#" className="hover:text-indigo-400 transition duration-300">DhiWise vs Appsmith</a></li>
-            <li><a href="#" className="hover:text-indigo-400 transition duration-300">DhiWise vs FlutterFlow</a></li>
-            <li><a href="#" className="hover:text-indigo-400 transition duration-300">DhiWise vs Monday Hero</a></li>
-            <li><a href="#" className="hover:text-indigo-400 transition duration-300">DhiWise vs Retool</a></li>
-            <li><a href="#" className="hover:text-indigo-400 transition duration-300">DhiWise vs Bubble</a></li>
-            <li><a href="#" className="hover:text-indigo-400 transition duration-300">DhiWise vs Figma Dev Mode</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h2 className="text-xl font-semibold mb-4 text-gray-200">Connect</h2>
-          <div className="flex space-x-4 text-gray-400 text-xl">
-            <a href="#"><FaGithub className="hover:text-white transition" /></a>
-            <a href="#"><FaLinkedin className="hover:text-white transition" /></a>
-            <a href="#"><BsYoutube className="hover:text-white transition" /></a>
-          </div>
-          <p className="mt-6 text-sm text-gray-500">© {new Date().getFullYear()} Penora. All rights reserved.</p>
+        <div className="text-center md:text-right">
+          <p className="text-sm text-gray-500">
+            © {new Date().getFullYear()} Penora. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useAuth } from "../context/AuthProvider";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,} from "react-router-dom";
 import axios from "axios";
 import {
   FaBlogger,
@@ -19,6 +19,27 @@ const Sidebar = ({ setComponent }) => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const baseURL = import.meta.env.VITE_BACKEND_URL;
+  const [dateTime, setDateTime] = useState("");
+
+useEffect(() => {
+  const updateTime = () => {
+    const now = new Date();
+    const formatted = now.toLocaleString("en-US", {
+      weekday: "short",
+      day: "numeric",
+      month: "short",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",  
+      hour12: true,
+    });
+    setDateTime(formatted.replace(",", " ·")); 
+  };
+  updateTime();
+  const interval = setInterval(updateTime, 1000); 
+  return () => clearInterval(interval);
+}, []);
+
   const logoutHandler = async () => {
     try {
       const { data } = await axios.get(`${baseURL}/logout`, {
@@ -36,7 +57,7 @@ const Sidebar = ({ setComponent }) => {
   const confirmDeleteAll = () => {
     toast((t) => (
       <span>
-        <p className="text-white">⚠️ Delete all blogs permanently?</p>
+        <p className="text-black">⚠️ Delete all blogs permanently?</p>
         <div className="flex justify-end gap-4 mt-2">
           <button
             className="bg-red-600 px-3 py-1 text-white rounded"
@@ -97,6 +118,9 @@ const Sidebar = ({ setComponent }) => {
   />
   <p className="mt-3 text-xl font-semibold">{profile?.name}</p>
   <p className="text-sm text-gray-400">{profile?.role.toUpperCase()}</p>
+  <div className="mt-2 hidden sm:flex items-center px-3 py-1 text-black bg-[#ffffff] rounded-md shadow-inner">
+  {dateTime}
+</div>
 
   <button
     title="Back to Home"
