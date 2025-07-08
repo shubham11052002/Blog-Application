@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const user = require('./routes/user');
 const blog = require('./routes/blog');
 const fileUpload = require('express-fileupload');
-const cloudinary = require('cloudinary').v2; // Ensure proper import
+const cloudinary = require('cloudinary').v2; 
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 dotenv.config();
@@ -12,9 +12,7 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT;
 const MONGO_URI = process.env.MONGO_URI;
-// console.log(MONGO_URI);
 
-// Middleware
 app.use(fileUpload(
     {
         useTempFiles: true,

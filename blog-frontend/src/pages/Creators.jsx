@@ -28,12 +28,8 @@ function Creators() {
           key={creator._id}
           className="w-60 rounded-xl overflow-hidden shadow-md bg-white hover:shadow-xl transition duration-300"
         >
-          <div className="w-full h-32">
-            <img
-              src={creator.photo.url}
-              alt="background"
-              className="w-full h-full object-cover"
-            />
+          <div className="w-full h-32 relative">
+          <img src={creator.photo.url} alt="background" className="w-full h-full object-cover" />
           </div>
           <div className="flex flex-col items-center px-4 py-4">
             <img

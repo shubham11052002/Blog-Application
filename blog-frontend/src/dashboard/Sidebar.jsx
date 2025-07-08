@@ -115,9 +115,9 @@ const Sidebar = ({ setComponent }) => {
           {profile?.role === "admin" && (
             <>
               <NavButton icon={FaUsers} label="User List" onClick={() => setComponent("User List")} />
-              <NavButton icon={FaTrash} label="Delete All Blogs" onClick={confirmDeleteAll} />
             </>
           )}
+          <NavButton icon={FaTrash} label="Delete All Blogs" onClick={confirmDeleteAll} />
         </div>
 
         <div className="px-4 py-6">

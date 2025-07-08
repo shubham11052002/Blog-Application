@@ -7,12 +7,15 @@ router.post("/register", (req, res) => {
 });
 router.post("/login", (req, res) => {
     UserControllers.Login(req, res);
-  });   
-router.get("/logout", isAuthenticate,checkBlocked, (req, res) => {
+});
+router.get("/logout", isAuthenticate, checkBlocked, (req, res) => {
     UserControllers.Logout(req, res);
 });
 router.get("/my-profile", isAuthenticate, checkBlocked, (req, res) => {
     UserControllers.getMyProfile(req, res);
+});
+router.get("/creator/:id", (req, res) => {
+    UserControllers.getSingleCreator(req, res);
 });
 router.get("/admins", (req, res) => {
     UserControllers.getAdmins(req, res);

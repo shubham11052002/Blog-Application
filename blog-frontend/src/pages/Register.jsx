@@ -105,6 +105,7 @@ const navigateTo = useNavigate()
           <option value="">Select your Education</option>
           <option value="B.tech">B.tech</option>
           <option value="M.tech">M.tech</option>
+          <option value="M.tech">10th Fail</option>
         </select>
         <div className="flex items-center mb-4">
           <div className="photo w-20 h-20 mr-4">
