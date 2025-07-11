@@ -20,10 +20,10 @@ router.get("/creator/:id", (req, res) => {
 router.get("/admins", (req, res) => {
     UserControllers.getAdmins(req, res);
 })
-router.get("/users", isAuthenticate, isAdmin("admin"), (req, res) => {
+router.get("/users", isAuthenticate, isAdmin("admin", "superadmin"), (req, res) => {
     UserControllers.getAllUsers(req, res);
 })
-router.put("/block/:id", isAuthenticate, isAdmin("admin"), (req, res) => {
+router.put("/block/:id", isAuthenticate, isAdmin("admin", "superadmin"), (req, res) => {
     UserControllers.blockUser(req, res);
 })
 module.exports = router;

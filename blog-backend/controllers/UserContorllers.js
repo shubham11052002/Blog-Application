@@ -138,20 +138,15 @@ const getAdmins = async (req, res) => {
   }
 }
 const getAllUsers = async (req, res) => {
+  const currentUser = req.user;
+  let filter = { role: "user" };
+  if (currentUser.email === "shubham@gmail.com" && currentUser.role === "superadmin") {
+    filter = { role: { $in: ["user", "admin"] } };
+  }
   try {
-    console.log("📥 Received request to get all users.");
-
-    const users = await User.find({ role: { $ne: 'admin' } }).select('-password');  // Exclude admins by filtering role
-
-    // console.log("📤 Found users:", users);
-
-    if (users.length > 0) {
-      return res.status(200).json({ success: true, users });
-    } else {
-      return res.status(404).json({ success: false, message: 'No users found' });
-    }
+    const users = await User.find(filter).select("-password");
+    return res.status(200).json({ success: true, users });
   } catch (err) {
-    console.error("❌ Error in getAllUsers:", err.message);
     return res.status(500).json({ success: false, message: 'Server error' });
   }
 };

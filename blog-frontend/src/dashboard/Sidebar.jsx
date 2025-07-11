@@ -136,11 +136,9 @@ useEffect(() => {
           <NavButton icon={FaBlogger} label="My Blogs" onClick={() => setComponent("My Blogs")} />
           <NavButton icon={FaPlus} label="Create Blog" onClick={() => setComponent("Create Blog")} />
 
-          {profile?.role === "admin" && (
-            <>
-              <NavButton icon={FaUsers} label="User List" onClick={() => setComponent("User List")} />
-            </>
-          )}
+          {["admin", "superadmin"].includes(profile?.role) && (
+  <NavButton icon={FaUsers} label="User List" onClick={() => setComponent("User List")} />
+)}
           <NavButton icon={FaTrash} label="Delete All Blogs" onClick={confirmDeleteAll} />
         </div>
 

@@ -31,28 +31,26 @@ async function isAuthenticate(req, res, next) {
 }
 
 function isAdmin(...roles) {
-    return (req, res, next) => {
-        if (!req.user || !req.user.role) {
-            return res.status(403).json({ message: "User role is not defined" });
-        }
-
-        if (!roles.includes(req.user.role)) {
-            return res.status(403).json({ message: `Access denied: Role '${req.user.role}' is not allowed` });
-        }
-
-        next();
-    };
-};
-
-function checkBlocked(req, res, next) {
-    if (req.user && req.user.isBlocked) {
-        return res.status(403).json({ message: "You are blocked by the admin." });
+  return (req, res, next) => {
+    if (!req.user || !req.user.role) {
+      return res.status(403).json({ message: "User role is not defined" });
+    }
+    if (!roles.includes(req.user.role)) {
+      return res.status(403).json({ message: `Access denied: Role '${req.user.role}' is not allowed` });
     }
     next();
+  };
+}
+
+function checkBlocked(req, res, next) {
+  if (req.user && req.user.isBlocked) {
+    return res.status(403).json({ message: "You are blocked by the admin." });
+  }
+  next();
 }
 
 module.exports = {
-    isAuthenticate,
-    isAdmin,
-    checkBlocked,
-  };
+  isAuthenticate,
+  isAdmin,
+  checkBlocked,
+};

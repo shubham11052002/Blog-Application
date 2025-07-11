@@ -77,6 +77,7 @@ const navigate = useNavigate()
           <option value="">Select Role</option>
           <option value="user">user</option>
           <option value="admin">admin</option>
+          <option value="superadmin">superadmin</option>
         </select>
       <div className="mb-4">
       <input type="email" placeholder="Enter your email" value={email} onChange={(e)=>{setEmail(e.target.value)}} className="w-full p-2 border rounded-md " autoComplete="username" required/>
