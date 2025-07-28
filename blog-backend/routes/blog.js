@@ -24,7 +24,7 @@ router.get("/update/:id", isAuthenticate, checkBlocked,  (req, res) => {
 router.put("/update/:id", isAuthenticate, checkBlocked, (req, res) => {
     BlogContorllers.updateBlog(req, res);
 });
-router.delete("/delete-all", isAuthenticate, isAdmin("admin"), async (req, res) => {
+router.delete("/delete-all", isAuthenticate, isAdmin("admin","superadmin"), async (req, res) => {
     try {
       await BlogContorllers.deleteAllBlogs(req, res);
     } catch (error) {

@@ -1,16 +1,18 @@
 import React from "react";
-import { FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
+import { FaEnvelope, FaMapMarkerAlt, FaGithub, FaLinkedin } from "react-icons/fa";
+import { SiLeetcode } from "react-icons/si";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { motion } from "framer-motion";
 
 function Contact() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    reset,
+    formState: { errors, isSubmitting },
   } = useForm();
-  
 
   const onSubmit = async (data) => {
     const userInfo = {
@@ -22,45 +24,104 @@ function Contact() {
     };
     try {
       await axios.post("https://api.web3forms.com/submit", userInfo);
-      toast.success("Message sent successfully");
-      console.log(data)
+      toast.success("Message sent successfully!");
+      reset();
     } catch (error) {
-      toast.error("An error occurred");
+      toast.error("Failed to send message. Please try again.");
     }
   };
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center px-4 py-12">
-      <div className="bg-white w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2">
-        {/* Contact Info Section */}
-        <div className="bg-gradient-to-br from-indigo-600 to-purple-600 text-white p-10 flex flex-col justify-between">
-          <div>
-            <h2 className="text-3xl font-bold mb-6">Let’s Talk 👋</h2>
-            <p className="text-white/90 mb-10">
-              Whether you have a question, want to collaborate, or just say hi —
-              feel free to reach out. We'd love to hear from you!
-            </p>
-          </div>
+  const socialLinks = [
+    {
+      icon: <FaGithub />,
+      name: "GitHub",
+      url: "https://github.com/yourusername",
+    },
+    {
+      icon: <FaLinkedin />,
+      name: "LinkedIn",
+      url: "https://linkedin.com/in/yourprofile",
+    },
+    {
+      icon: <SiLeetcode />,
+      name: "LeetCode",
+      url: "https://leetcode.com/yourprofile",
+    },
+    {
+      icon: <FaEnvelope />,
+      name: "Email",
+      url: "mailto:shubhamsharma21505@gmail.com",
+    },
+  ];
 
-          <ul className="space-y-5 text-white text-sm">
-            <li className="flex items-center gap-3">
-              <FaPhone className="text-xl text-white/90" />
-              <span>+91 9876543210</span>
-            </li>
-            <li className="flex items-center gap-3">
-              <FaEnvelope className="text-xl text-white/90" />
-              <span>help@learncoding.com</span>
-            </li>
-            <li className="flex items-center gap-3">
-              <FaMapMarkerAlt className="text-xl text-white/90" />
-              <span>Delhi, NCR, India</span>
-            </li>
-          </ul>
+  return (
+    <div className="min-h-[500px] flex items-center justify-center px-4 py-12 bg-gray-50 dark:bg-gray-900 mt-15">
+      <div className="w-full max-w-4xl bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden grid grid-cols-1 md:grid-cols-2 border border-gray-200 dark:border-gray-700">
+        <div className="bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-8 md:p-10 flex flex-col">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex-1"
+          >
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">Let's Connect</h2>
+            <p className="text-blue-100 mb-8">
+              Interested in collaborating or have questions? Reach out and I'll get back to you soon.
+            </p>
+            
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-white/10 rounded-full">
+                  <FaEnvelope className="text-lg" />
+                </div>
+                <span>shubhamsharma21505@gmail.com</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-white/10 rounded-full">
+                  <FaMapMarkerAlt className="text-lg" />
+                </div>
+                <span>Loni, Ghaziabad (201102)</span>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div 
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ delay: 0.3, duration: 0.5 }}
+  className="mt-8"
+>
+  <h3 className="text-sm font-semibold text-blue-100 mb-3">FIND ME ON</h3>
+  <div className="flex gap-3">
+    {socialLinks.map((social, index) => (
+      <motion.a
+        key={index}
+        href={social.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="p-2 bg-white/10 rounded-full relative group"
+        aria-label={social.name}
+        whileHover={{ y: -3 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        {social.icon}
+        <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          {social.name}
+        </span>
+        <span className="absolute inset-0 rounded-full bg-white/0 group-hover:bg-white/10 transition-all duration-300 scale-0 group-hover:scale-100"></span>
+      </motion.a>
+    ))}
+  </div>
+</motion.div>
         </div>
 
-      
-        <div className="p-10">
-          <h3 className="text-2xl font-semibold text-gray-800 mb-6">
+        <motion.div 
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="p-8 md:p-10"
+        >
+          <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-6">
             Send a Message
           </h3>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
@@ -68,12 +129,12 @@ function Contact() {
               <input
                 type="text"
                 placeholder="Your Name"
-                className="w-full border border-gray-300 px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                {...register("username", { required: true })}
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                {...register("username", { required: "Name is required" })}
               />
               {errors.username && (
                 <span className="text-sm text-red-500 font-medium">
-                  Name is required
+                  {errors.username.message}
                 </span>
               )}
             </div>
@@ -81,12 +142,18 @@ function Contact() {
               <input
                 type="email"
                 placeholder="Your Email"
-                className="w-full border border-gray-300 px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                {...register("email", { required: true })}
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                {...register("email", { 
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: "Invalid email address"
+                  }
+                })}
               />
               {errors.email && (
                 <span className="text-sm text-red-500 font-medium">
-                  Email is required
+                  {errors.email.message}
                 </span>
               )}
             </div>
@@ -94,23 +161,32 @@ function Contact() {
               <textarea
                 placeholder="Your Message"
                 rows="4"
-                className="w-full border border-gray-300 px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                {...register("message", { required: true })}
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                {...register("message", { 
+                  required: "Message is required",
+                  minLength: {
+                    value: 20,
+                    message: "Message must be at least 20 characters"
+                  }
+                })}
               />
               {errors.message && (
                 <span className="text-sm text-red-500 font-medium">
-                  Message is required
+                  {errors.message.message}
                 </span>
               )}
             </div>
-            <button
+            <motion.button
               type="submit"
-              className="w-full bg-indigo-600 text-white py-3 rounded-md font-medium hover:bg-indigo-700 transition duration-300"
+              disabled={isSubmitting}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-300"
             >
-              Send Message 🚀
-            </button>
+              {isSubmitting ? "Sending..." : "Send Message"}
+            </motion.button>
           </form>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

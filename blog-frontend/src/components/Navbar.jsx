@@ -53,7 +53,7 @@ const Navbar = () => {
 
         <div className="flex-shrink-0">
         <span className="text-3xl font-bold tracking-wide text-white inline-block hover:text-red-400 transition duration-1000">
-  Penora⚡
+  <i>Penora</i>⚡
 </span>
         </div>
 

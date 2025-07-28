@@ -14,6 +14,7 @@ import Creators from "../src/pages/Creators.jsx"
 import { Toaster } from 'react-hot-toast';
 import UpdateBlog from './dashboard/UpdateBlog.jsx'
 import CreatorProfile from './pages/CreatorProfile.jsx'
+import CreateBlog from './dashboard/CreateBlog.jsx'
 // import MyBlogs from './dashboard/MyBlogs.jsx'
 import { Detail } from './pages/Detail.jsx'
 
@@ -40,6 +41,7 @@ function App() {
   <Route path="/creators" element={<Creators />} />
   <Route path="/blog/update/:id" element={<UpdateBlog />} />
   <Route path='/creator/:id' element={<CreatorProfile/>} />
+  <Route path='/create' element={<CreateBlog/>} />
 </Routes>
       <Toaster />
    { !hideNavbarFooter && <Footer/> } 
