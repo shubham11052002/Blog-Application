@@ -32,7 +32,7 @@ export const Detail = () => {
   }
 
   return (
-    <section className="container mx-auto px-4 py-10 max-w-5xl">
+    <section className="container mx-auto px-4 py-10 max-w-5xl mt-10 ">
       <div className="mb-4">
         <span className="text-sm text-blue-600 font-semibold uppercase tracking-wide">
           {blogs.category}

@@ -6,6 +6,7 @@ cloudinary.config({
     api_key: process.env.CLOUD_API_KEY,
     api_secret: process.env.CLOUD_SECRET_KEY,
 });
+
 const createBlog = async (req, res) => {
     try {
         if (!req.files || !req.files.blogImage) {

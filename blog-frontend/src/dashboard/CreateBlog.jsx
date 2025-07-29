@@ -79,7 +79,6 @@ function CreateBlog() {
   return (
     <div className="min-h-screen bg-[#0f0f1c] text-white pt-8 pb-8 px-4 sm:px-6 mt-15">
       <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Left Column - Form */}
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -91,7 +90,6 @@ function CreateBlog() {
           </h2>
           
           <form onSubmit={handleCreateBlog} className="space-y-4">
-            {/* Category Field */}
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-1">Category</label>
               <select
@@ -110,7 +108,6 @@ function CreateBlog() {
               </select>
             </div>
 
-            {/* Title Field */}
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-1">Title</label>
               <input
@@ -124,7 +121,6 @@ function CreateBlog() {
               />
             </div>
 
-            {/* Image Upload */}
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-1">Featured Image</label>
               <div className="border border-[#3a3a4a] rounded-md p-2 bg-[#2a2a3a]">
@@ -157,7 +153,6 @@ function CreateBlog() {
               </div>
             </div>
 
-            {/* About Field */}
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-1">Content</label>
               <textarea
@@ -171,7 +166,6 @@ function CreateBlog() {
               />
             </div>
 
-            {/* Submit Button */}
             <motion.button
               type="submit"
               whileTap={{ scale: 0.98 }}
@@ -187,7 +181,6 @@ function CreateBlog() {
           </form>
         </motion.div>
 
-        {/* Right Column - Guidelines */}
         <motion.div 
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -225,7 +218,6 @@ function CreateBlog() {
             </div>
           </div>
 
-          {/* Preview Section */}
           {formData.title && (
             <div className="mt-6 pt-6 border-t border-[#2a2a3a]">
               <h3 className="text-sm font-semibold mb-2 text-gray-300">LIVE PREVIEW</h3>
