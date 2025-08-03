@@ -398,12 +398,9 @@ const Home = () => {
                 transition={{ delay: 0.6 }}
                 className="relative overflow-hidden rounded-2xl border-2 border-[#3a3a4a] shadow-2xl hover:border-none hover:shadow-none hover:scale-105 transition-all duration-300 cursor-pointer hover:shadow-[#7f5af0]/30 "
               >
-                <img
-                  src="/public/blog_image.png" 
-                  alt="Blog showcase"
-                  className="w-full h-auto"
-                  loading="eager"
-                />
+                
+                <img src="/blog_image.png" alt="Blog showcase" className="w-full h-auto" loading="eager" />
+
                 <motion.div 
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
