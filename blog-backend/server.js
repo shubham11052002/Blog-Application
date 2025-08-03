@@ -69,7 +69,6 @@ app.get('/', (req, res) => {
     res.send("<h1>Hello World...</h1>");
 });
 
-// ✅ Start the server
 app.listen(port, () => {
     console.log(`🚀 Server is running on http://localhost:${port}`);
 });
