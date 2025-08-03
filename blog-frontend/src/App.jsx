@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route,Routes,useLocation } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import Navbar from '../src/components/Navbar.jsx'
 import Blogs from "../src/pages/Blogs.jsx"
 import Home from "../src/components/Home.jsx"
@@ -15,36 +15,37 @@ import { Toaster } from 'react-hot-toast';
 import UpdateBlog from './dashboard/UpdateBlog.jsx'
 import CreatorProfile from './pages/CreatorProfile.jsx'
 import CreateBlog from './dashboard/CreateBlog.jsx'
-// import MyBlogs from './dashboard/MyBlogs.jsx'
 import { Detail } from './pages/Detail.jsx'
 
 function App() {
   const location = useLocation();
   const { blogs } = useAuth();
-  // console.log("Blogs are here ",blogs)
-  const hideNavbarFooter = ["/dashboard","/login","/register"].includes(
-    location.pathname
-  )
+
+  const hideNavbarFooter = ["/dashboard", "/login", "/register"].includes(location.pathname)
 
   return (
-    <div>
-     {!hideNavbarFooter &&  <Navbar/>}
-     <Routes>
-  <Route path="/" element={<Home />} />
-  <Route path="/blogs" element={<Blogs />} />
-  <Route path="/about" element={<About />} />
-  <Route path="/contact" element={<Contact />} />
-  <Route path="/login" element={<Login />} />
-  <Route path="/blogs/:id" element={<Detail />} />
-  <Route path="/register" element={<Register />} />
-  <Route path="/dashboard" element={<Dashboard />} />
-  <Route path="/creators" element={<Creators />} />
-  <Route path="/blog/update/:id" element={<UpdateBlog />} />
-  <Route path='/creator/:id' element={<CreatorProfile/>} />
-  <Route path='/create' element={<CreateBlog/>} />
-</Routes>
+    <div className="flex flex-col min-h-screen bg-[#1e1e2e] text-white">
+      {!hideNavbarFooter && <Navbar />}
+      
+      <main className="flex-grow">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/blogs/:id" element={<Detail />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/creators" element={<Creators />} />
+          <Route path="/blog/update/:id" element={<UpdateBlog />} />
+          <Route path="/creator/:id" element={<CreatorProfile />} />
+          <Route path="/create" element={<CreateBlog />} />
+        </Routes>
+      </main>
+
       <Toaster />
-   { !hideNavbarFooter && <Footer/> } 
+      {!hideNavbarFooter && <Footer />}
     </div>
   )
 }
