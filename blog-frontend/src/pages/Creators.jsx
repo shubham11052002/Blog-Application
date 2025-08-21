@@ -86,9 +86,11 @@ function Creators() {
               className="block w-full pl-10 pr-3 py-3 bg-[#161627] border border-[#2a2a3a] rounded-lg text-white placeholder-[#94a3b8] focus:outline-none focus:ring-2 focus:ring-[#7f5af0] focus:border-transparent"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-            />
+            /> 
           </div>
+          <div className="mr-10 m-2 font-bold ">Total Creators : {filteredCreators.length}</div>
         </motion.div>
+        
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredCreators.map((creator, index) => (

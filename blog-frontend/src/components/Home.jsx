@@ -263,7 +263,7 @@ const Home = () => {
   };
 
   return (
-    <div className=" bg-gradient-to-b from-[#0f0f1c] to-[#161627] text-white font-sans">
+    <div className=" bg-gradient-to-b from-[#0f0f1c] to-[#161627] text-white font-sans ">
       <section className="relative px-6 md:px-1 py-24 md:py-32 max-w-7xl mx-auto">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div

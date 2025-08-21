@@ -57,7 +57,7 @@ function CreatorProfile() {
         <motion.button
           onClick={() => navigate("/creators")}
           whileHover={{ x: -4 }}
-          className="flex items-center text-white hover:bg-red-600 p-1 rounded hover:font-bold mb-6 transition duration-300"
+          className="flex items-center text-white  p-1 rounded  mb-6 "
         >
           <FiArrowLeft className="mr-2" />
           Back to Creators
