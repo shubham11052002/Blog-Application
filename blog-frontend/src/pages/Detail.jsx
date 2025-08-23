@@ -37,7 +37,7 @@ export const Detail = () => {
         <span className="text-sm text-blue-600 font-semibold uppercase tracking-wide">
           {blogs.category}
         </span>
-        <h1 className="text-3xl md:text-5xl font-bold text-gray-800 mt-2 mb-6 leading-tight">
+        <h1 className="text-3xl md:text-5xl font-bold    mt-2 mb-6 leading-tight">
           {blogs.title}
         </h1>
         <div className="flex items-center space-x-4 mb-6">
@@ -46,7 +46,7 @@ export const Detail = () => {
             alt="author"
             className="w-12 h-12 rounded-full border border-gray-300"
           />
-          <p className="text-gray-700 font-medium">{blogs.adminName}</p>
+          <p className=" font-medium">{blogs.adminName}</p>
         </div>
       </div>
 
@@ -59,7 +59,7 @@ export const Detail = () => {
           />
         </div>
         <div className="md:w-1/2">
-          <p className="text-lg text-gray-700 leading-relaxed">
+          <p className="text-lg  leading-relaxed">
             {blogs.about}
           </p>
         </div>
@@ -67,7 +67,7 @@ export const Detail = () => {
 
       <div className="mt-10 border-t pt-6 text-gray-500 text-sm">
       <p className="text-gray-500 text-sm">
-  Posted on: {new Date(blogs?.createdAt).toLocaleString()}
+  Published on: {new Date(blogs?.createdAt).toLocaleString()}
 </p>
       </div>
     </section>
