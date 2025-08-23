@@ -237,8 +237,37 @@ const Home = () => {
   const [blogs, setBlogs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+  const [users,setUsers] = useState([]);
   const baseURL = import.meta.env.VITE_BACKEND_URL;
+  
+const [activeReaders, setActiveReaders] = useState(0);
+const [featuredWriters, setFeaturedWriters] = useState(0);
+function formatNumber(num) {
+  if (num >= 1_000_000_000) {
+    return Math.floor((num / 1_000_000_000) * 100) / 100 + "B"; 
+  } else if (num >= 1_000_000) {
+    return Math.floor((num / 1_000_000) * 10) / 10 + "M"; 
+  } else if (num >= 1_000) {
+    return Math.floor((num / 1_000) * 10) / 10 + "K"; 
+  } else {
+    return num.toString();
+  }
+}
 
+useEffect(() => {
+  const fetchStats = async () => {
+    try {
+      const { data } = await axios.get(`${baseURL}/users-stats`);
+      setActiveReaders(data.activeReaders);
+      setFeaturedWriters(data.featuredWriters);
+    } catch (error) {
+      console.error("Failed to load stats:", error);
+    }
+  };
+
+  fetchStats();
+
+}, [baseURL]);
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
@@ -261,6 +290,10 @@ const Home = () => {
   const handleCreatePost = () => {
     navigate("/create");
   };
+
+  console.log(activeReaders," this is active reader")
+
+  
 
   return (
     <div className=" bg-gradient-to-b from-[#0f0f1c] to-[#161627] text-white font-sans ">
@@ -354,7 +387,7 @@ const Home = () => {
                   <FiUsers className="text-2xl text-[#7f5af0]" />
                 </div>
                 <div>
-                  <div className="text-2xl font-bold">10K+</div>
+                  <div className="text-2xl font-bold">{formatNumber(activeReaders)} K</div>
                   <div className="text-gray-400 text-sm">Active Readers</div>
                 </div>
               </div>
@@ -363,7 +396,7 @@ const Home = () => {
                   <FiAward className="text-2xl text-[#2cb67d]" />
                 </div>
                 <div>
-                  <div className="text-2xl font-bold">500+</div>
+                  <div className="text-2xl font-bold">{formatNumber(featuredWriters)}K</div>
                   <div className="text-gray-400 text-sm">Featured Writers</div>
                 </div>
               </div>
@@ -372,7 +405,7 @@ const Home = () => {
                   <FiBarChart2 className="text-2xl text-[#9370ff]" />
                 </div>
                 <div>
-                  <div className="text-2xl font-bold ">1M+</div>
+                  <div className="text-2xl font-bold ">250K</div>
                   <div className="text-gray-400 text-sm">Monthly Views</div>
                 </div>
               </div>
