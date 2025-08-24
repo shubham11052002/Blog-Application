@@ -7,7 +7,7 @@ const UserList = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [usersPerPage, setUsersPerPage] = useState(6);
+  const [usersPerPage, setUsersPerPage] = useState(10);
   const [currentUser, setCurrentUser] = useState(null);
   const [roleFilter, setRoleFilter] = useState("all");
 

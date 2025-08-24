@@ -43,7 +43,6 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ✅ Connect to MongoDB using async/await
 async function connectDB() {
     try {
         await mongoose.connect(MONGO_URI);
@@ -63,12 +62,9 @@ cloudinary.config({
 
 app.use(user);
 app.use(blog);
-
-// ✅ Root Route
 app.get('/', (req, res) => {
     res.send("<h1>Hello World...</h1>");
 });
-
 app.listen(port, () => {
     console.log(`🚀 Server is running on http://localhost:${port}`);
 });

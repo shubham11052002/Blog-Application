@@ -490,7 +490,6 @@ useEffect(() => {
         </motion.div>
       </section>
 
-      {/* Value Proposition */}
       <section className="bg-[#161627] py-24 px-6 md:px-12">
         <div className="max-w-7xl mx-auto">
           <motion.div 
@@ -550,7 +549,6 @@ useEffect(() => {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-24 px-6 md:px-12 bg-gradient-to-r from-[#0f0c29] via-[#2a0845] to-[#0f0c29]">
         <div className="max-w-5xl mx-auto text-center">
           <motion.div 

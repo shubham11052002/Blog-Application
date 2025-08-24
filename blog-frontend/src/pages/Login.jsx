@@ -72,20 +72,20 @@ const navigate = useNavigate()
       <div className='font-semibold text-xl items-center text-center'> 
           <span className='text-blue-900 text-2xl'>Penora⚡</span>
         </div>
-        <h1 className="text-xl font-semibold mb-6 ">Login</h1>
-        <select value={role} onChange={(e)=>{setRole(e.target.value)}} className="w-full p-2 mb-4 border rounded-md ">
+        <h1 className="text-xl  text-black font-semibold mb-6 ">Login</h1>
+        <select value={role} onChange={(e)=>{setRole(e.target.value)}} className="w-full p-2 mb-4 border rounded-md  text-black">
           <option value="">Select Role</option>
           <option value="user">user</option>
           <option value="admin">admin</option>
           <option value="superadmin">superadmin</option>
         </select>
       <div className="mb-4">
-      <input type="email" placeholder="Enter your email" value={email} onChange={(e)=>{setEmail(e.target.value)}} className="w-full p-2 border rounded-md " autoComplete="username" required/>
+      <input type="email" placeholder="Enter your email" value={email} onChange={(e)=>{setEmail(e.target.value)}} className="w-full p-2 border rounded-md  text-black" autoComplete="username" required/>
       </div>
       <div className="mb-4">
-      <input type="password"  placeholder="Enter your password" value={password} onChange={(e)=>{setPassword(e.target.value)}} className="w-full p-2 border rounded-md " autoComplete="current-password"  required/>
+      <input type="password"  placeholder="Enter your password" value={password} onChange={(e)=>{setPassword(e.target.value)}} className="w-full p-2 border rounded-md  text-black" autoComplete="current-password"  required/>
       </div>
-              <p className="text-center mb-4">New User?&nbsp;&nbsp; <Link to={"/register"} className="text-blue-700 ">Register now</Link></p>
+              <p className="text-center mb-4 text-black">New User?&nbsp;&nbsp; <Link to={"/register"} className="text-blue-700 ">Register now</Link></p>
        <div className="flex justif y-center">
        <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition duration-300">
   Login
