@@ -79,7 +79,7 @@ const Login = async (req, res) => {
     if (user.isBlocked) {
       return res.status(403).send({
         success: false,
-        message: "❌ You are blocked. Please contact the administrator.",
+        message: "You are blocked. Please contact the administrator.",
       });
     }
 
@@ -95,7 +95,7 @@ const Login = async (req, res) => {
     const token = await CreateTokenSvaeCokkies(user._id, res);
 
     return res.status(200).send({
-      message: "✅ User login successfully",
+      message: "User login successfully",
       user: {
         _id: user._id,
         name: user.name,
@@ -169,11 +169,11 @@ const getSingleCreator = async (req, res) => {
 };
 const blockUser = async (req, res) => {
   const user = await User.findById(req.params.id);
-  if (!user) return res.status(404).json({ message: "User not found" });
-
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
   user.isBlocked = !user.isBlocked;
   await user.save();
-
   res.status(200).json({
     message: user.isBlocked ? "User has been blocked" : "User has been unblocked",
     user,

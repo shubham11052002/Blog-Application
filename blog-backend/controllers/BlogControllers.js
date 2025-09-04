@@ -132,7 +132,6 @@ const updateBlog = async (req, res) => {
             return res.status(403).json({ message: "You are not authorized to update this blog" });
         }
 
-        // Update fields
         blog.title = req.body.title || blog.title;
         blog.category = req.body.category || blog.category;
         blog.about = req.body.about || blog.about;
