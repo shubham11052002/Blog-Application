@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button, Card, CardBody, Skeleton } from "@nextui-org/react";
+// import ContinuousCounter from "../home/ContinuousCounter";
 import { FiArrowRight, FiEdit3, FiSearch, FiTrendingUp, FiUsers, FiClock, FiChevronLeft, FiChevronRight, FiBookOpen, FiAward, FiBarChart2 } from "react-icons/fi";
 
 const BlogCarousel = ({ blogs, isLoading }) => {
@@ -327,7 +328,7 @@ useEffect(() => {
               className="inline-flex items-center px-5 py-2.5 bg-[#7f5af0]/10 text-[#7f5af0] rounded-full text-sm font-medium backdrop-blur-md border border-[#7f5af0]/20"
             >
               <FiTrendingUp className="mr-2 text-lg" />
-              Trending platform for creators
+              Trending platform for creators 
             </motion.div>
             <motion.h1 
               initial={{ opacity: 0, y: 30 }}
