@@ -13,12 +13,12 @@ cloudinary.config({
 const Register = async (req, res) => {
   try {
     if (!req.files || Object.keys(req.files).length === 0 || !req.files.photo) {
-      console.log("Photo is missing");
+      // console.log("Photo is missing");
       return res.status(400).json({ success: false, message: "User photo is required" });
     }
 
     const { photo } = req.files;
-    console.log("Photo details:", photo); // Debugging
+    // console.log("Photo details:", photo); // Debugging
 
     const allowedFormats = ["image/jpeg", "image/png", "image/webp", "image/jpg"];
     if (!allowedFormats.includes(photo.mimetype)) {

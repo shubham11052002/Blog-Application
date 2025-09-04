@@ -30,7 +30,7 @@ app.use(
       if (!origin || allowedOrigins.some(o => origin.startsWith(o))) {
         callback(null, true);
       } else {
-        console.error("❌ CORS error: Blocked origin →", origin);
+        console.error("CORS error: Blocked origin →", origin);
         callback(new Error("CORS error: Not allowed"));
       }
     },
@@ -49,7 +49,7 @@ async function connectDB() {
         console.log("MongoDB Connected Successfully");
     } catch (error) {
         console.error("MongoDB Connection Failed:", error);
-        process.exit(1); // Stop the server if DB connection fails
+        process.exit(1); 
     }
 }
 connectDB();
@@ -66,5 +66,5 @@ app.get('/', (req, res) => {
     res.send("<h1>Hello World...</h1>");
 });
 app.listen(port, () => {
-    console.log(`🚀 Server is running on http://localhost:${port}`);
+    console.log(`Server is running on http://localhost:${port}`);
 });

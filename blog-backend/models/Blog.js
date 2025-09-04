@@ -4,7 +4,7 @@
         title: { type: String, required: true },
         blogImage: { public_id: { type: String, required: true }, url: { type: String } },
         category: { type: String, required: true },
-        about: { type: String, required: true, minLength: [10, "minimum length is 10 words"] },
+        about: { type: String, required: true, minLength: [30, "minimum 30 words required"] },
         adminName: { type: String, },
         adminPhoto: { type: String, },
         createdBy: { type: mongoose.Schema.ObjectId, ref: "User" },

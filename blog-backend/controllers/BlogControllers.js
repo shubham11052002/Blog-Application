@@ -114,52 +114,51 @@ const getMyBlogs = async (req, res) => {
 }
 const updateBlog = async (req, res) => {
     try {
-      const { id } = req.params;
-  
-      if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(400).json({ message: "Invalid blog ID" });
-      }
-  
-      const blog = await Blog.findById(id);
-      if (!blog) {
-        return res.status(404).json({ message: "Blog not found" });
-      }
-  
-      const isOwner = blog.createdBy.toString() === req.user._id.toString();
-      const isAdmin = req.user.role === "admin";
-  
-      if (!isOwner && !isAdmin) {
-        return res.status(403).json({ message: "You are not authorized to update this blog" });
-      }
-  
-      // Update fields
-      blog.title = req.body.title || blog.title;
-      blog.category = req.body.category || blog.category;
-      blog.about = req.body.about || blog.about;
-  
-      if (req.files && req.files.blogImage) {
-        const blogImage = req.files.blogImage;
-  
-        const allowedFormats = ["image/jpeg", "image/png", "image/webp", "image/jpg"];
-        if (!allowedFormats.includes(blogImage.mimetype)) {
-          return res.status(400).json({ message: "Invalid photo format" });
-        }
-  
-        const cloudinaryResponse = await cloudinary.uploader.upload(blogImage.tempFilePath);
-        blog.blogImage = {
-          public_id: cloudinaryResponse.public_id,
-          url: cloudinaryResponse.secure_url,
-        };
-      }
-  
-      await blog.save();
-      res.status(200).json({ message: "Blog updated successfully", blog });
-    } catch (error) {
-      console.error("Error updating blog:", error);
-      res.status(500).json({ message: "Internal server error" });
-    }
-  };
+        const { id } = req.params;
 
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ message: "Invalid blog ID" });
+        }
+
+        const blog = await Blog.findById(id);
+        if (!blog) {
+            return res.status(404).json({ message: "Blog not found" });
+        }
+
+        const isOwner = blog.createdBy.toString() === req.user._id.toString();
+        const isAdmin = req.user.role === "admin";
+
+        if (!isOwner && !isAdmin) {
+            return res.status(403).json({ message: "You are not authorized to update this blog" });
+        }
+
+        // Update fields
+        blog.title = req.body.title || blog.title;
+        blog.category = req.body.category || blog.category;
+        blog.about = req.body.about || blog.about;
+
+        if (req.files && req.files.blogImage) {
+            const blogImage = req.files.blogImage;
+
+            const allowedFormats = ["image/jpeg", "image/png", "image/webp", "image/jpg"];
+            if (!allowedFormats.includes(blogImage.mimetype)) {
+                return res.status(400).json({ message: "Invalid photo format" });
+            }
+
+            const cloudinaryResponse = await cloudinary.uploader.upload(blogImage.tempFilePath);
+            blog.blogImage = {
+                public_id: cloudinaryResponse.public_id,
+                url: cloudinaryResponse.secure_url,
+            };
+        }
+
+        await blog.save();
+        res.status(200).json({ message: "Blog updated successfully", blog });
+    } catch (error) {
+        console.error("Error updating blog:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
 const deleteAllBlogs = async (req, res) => {
     try {
         await Blog.deleteMany({});
@@ -168,8 +167,6 @@ const deleteAllBlogs = async (req, res) => {
         res.status(500).json({ message: "Error deleting blogs", error });
     }
 };
-
-
 
 module.exports = {
     createBlog,
